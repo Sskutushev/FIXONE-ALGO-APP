@@ -1,6 +1,8 @@
-// This is a test comment from Gemini. If you see this, App.js is updating correctly.
+// UNIQUE_TEST_COMMENT_20250817_1
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import AlgoBotShowcase from './components/AlgoBotShowcase';
+import BotDetailModal from './components/BotDetailModal';
 import AuthPage from './pages/AuthPage';
 
 //=========== ICONS (SVG) ===========//
@@ -76,10 +78,10 @@ const ICONS = {
 
 //=========== MOCK DATA ===========//
 const botImages = [
-  `${process.env.PUBLIC_URL}/1626182958_13-kartinkin-com-p-treider-art-art-krasivo-15.jpg`,
-  `${process.env.PUBLIC_URL}/images.jpg`,
-  `${process.env.PUBLIC_URL}/images (1).jpg`,
-  `${process.env.PUBLIC_URL}/images (2).jpg`,
+  `${process.env.PUBLIC_URL}/images (7).jpg`,
+  `${process.env.PUBLIC_URL}/images_chart2.jpg`,
+  `${process.env.PUBLIC_URL}/images_chart3.jpg`,
+  `${process.env.PUBLIC_URL}/images_chart4.jpg`,
 ];
 
 //=========== UI COMPONENTS ===========//
@@ -97,19 +99,16 @@ const Button = ({ children, variant = 'big-classic', icon: Icon, iconPosition = 
 };
 
 const StrategyCard = ({ title, description, imageSrc }) => (
-  <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col border border-gray-700">
-    <div className="relative">
+  <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col border border-gray-700 my-[10px]">
+    <div className="relative flex justify-center items-start">
       <img src={imageSrc} alt={title} className="w-full h-24 object-cover" />
       <div className="absolute top-0 left-0 bg-[#66A1BF] text-white font-bold text-sm px-3 py-1 m-2 rounded-full">
         Алго-бот
       </div>
     </div>
-    <div className="p-3 flex flex-col flex-grow">
+    <div className="p-3 flex flex-col pb-5">
       <h3 className="font-bold text-base mb-1">{title}</h3>
       <p className="text-xs text-gray-600 flex-grow">{description}</p>
-      <div className="mt-3">
-          <Button variant="small-outline" className="w-full !border-[#868686] !bg-[#E3E3E3] !text-black hover:!bg-[#868686] hover:!text-white">Подробнее</Button>
-      </div>
     </div>
   </div>
 );
@@ -165,21 +164,23 @@ const HowItWorksSection = () => {
 
     return (
         <div className="container mx-auto">
-            <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">Как это работает?</h2>
-            <div className="relative">
-                <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-auto hidden md:block" />
-                <div className="relative grid grid-cols-1 md:grid-cols-4 gap-y-16 md:gap-x-8">
+            
+            <div className="relative mb-[-100px]">
+                <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="w-full h-auto hidden md:block" />
+            </div>
+            <div className="relative mt-[100px]">
+                <div className="relative grid grid-cols-1 md:grid-cols-4 gap-y-8 md:gap-x-8">
                     {steps.map((item, index) => (
-                        <div key={item.step} className="flex flex-col items-center">
-                            <div className={`relative p-6 rounded-[60px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
-                                <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-16 w-16" />
+                        <div key={item.step} className={`flex flex-col items-center ${index === 0 ? 'mt-[-150px]' : index === 1 ? 'mt-[-100px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
+                            <div className={`relative p-6 rounded-[30px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
+                                <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-24 w-24" />
                                 <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
                                     Шаг {item.step}
                                 </div>
                                 <h3 className="font-bold text-xl mt-8 text-left">{item.title}</h3>
                             </div>
-                            <div className="mt-[30px] p-4 bg-gray-700 text-white rounded-[60px] w-full text-center">
-                                <p>{item.explanation}</p>
+                            <div className="mt-4 p-4 bg-gray-700 text-white rounded-[30px] w-full text-left">
+                                <p className="text-xs">{item.explanation}</p>
                             </div>
                         </div>
                     ))}
@@ -193,6 +194,18 @@ const HowItWorksSection = () => {
 //=========== LANDING PAGE ===========//
 const LandingPage = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBot, setSelectedBot] = useState(null);
+
+  const handleOpenModal = (bot) => {
+    setSelectedBot(bot);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedBot(null);
+  };
 
   const handleScrollTo = (e, targetId) => {
     e.preventDefault();
@@ -212,8 +225,8 @@ const LandingPage = () => {
 
   const sections = [
       { id: 'partners', title: 'Наши партнёры', component: <PartnersCarousel /> },
-      { id: 'how-it-works', title: 'Как это работает', component: <HowItWorksSection /> },
-      { id: 'showcase', title: 'Витрина алго-ботов' },
+      { id: 'how-it-works', title: 'Как это работает?', component: <HowItWorksSection /> },
+      { id: 'showcase', title: 'Витрина алго-ботов', component: <AlgoBotShowcase botsData={strategyCards} onOpenModal={handleOpenModal} /> },
       { id: 'builder', title: 'Конструктор ботов' },
       { id: 'terminal', title: 'Все рынки-один терминал' },
       { id: 'advantages', title: 'Наши преимущества' },
@@ -225,7 +238,7 @@ const LandingPage = () => {
 
   const navLinks = [
       { id: 'partners', title: 'Партнёры' },
-      { id: 'how-it-works', title: 'Как это работает' },
+      { id: 'how-it-works', title: 'Как это работает?' },
       { id: 'showcase', title: 'Витрина' },
       { id: 'about', title: 'О нас' },
       { id: 'faq', title: 'FAQ' },
@@ -299,9 +312,9 @@ const LandingPage = () => {
       
       {/* Sections */} 
       {sections.map((section, index) => (
-        <section key={section.id} id={section.id} className={`py-20 px-6 ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
+        <section key={section.id} id={section.id} className={`py-20 px-[10px] ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
             {section.component ? 
-                <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>{section.component}</div> : 
+                <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div> : 
                 (
                 <div className="container mx-auto">
                     <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>
@@ -348,6 +361,7 @@ const LandingPage = () => {
             </div>
         </div>
       </footer>
+      {isModalOpen && <BotDetailModal isOpen={isModalOpen} onClose={handleCloseModal} bot={selectedBot} />}
     </div>
   );
 };
