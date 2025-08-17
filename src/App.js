@@ -166,7 +166,7 @@ const HowItWorksSection = () => {
         <div className="container mx-auto">
             
             <div className="relative mb-[-100px]">
-                <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="w-full h-auto hidden md:block" />
+                <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="w-full h-auto hidden md:block" style={{ filter: 'brightness(1.5)' }} />
             </div>
             <div className="relative mt-[100px]">
                 <div className="relative grid grid-cols-1 md:grid-cols-4 gap-y-8 md:gap-x-8">
@@ -174,6 +174,10 @@ const HowItWorksSection = () => {
                         <div key={item.step} className={`flex flex-col items-center ${index === 0 ? 'mt-[-150px]' : index === 1 ? 'mt-[-100px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
                             <div className={`relative p-6 rounded-[30px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
                                 <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-24 w-24" />
+                                {item.step === 1 && <img src={`${process.env.PUBLIC_URL}/registration&KYC.svg`} alt="Registration Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
+                                {item.step === 2 && <img src={`${process.env.PUBLIC_URL}/transaction.svg`} alt="Transaction Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
+                                {item.step === 3 && <img src={`${process.env.PUBLIC_URL}/Submit.svg`} alt="Submit Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
+                                {item.step === 4 && <img src={`${process.env.PUBLIC_URL}/analytics_set.svg`} alt="Analytics Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
                                 <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
                                     Шаг {item.step}
                                 </div>
