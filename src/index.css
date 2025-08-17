@@ -36,6 +36,15 @@
   }
 }
 
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 /* Base hidden state for sections */
 .section-hidden {
   opacity: 0;

@@ -39,7 +39,16 @@ module.exports = {
         'gradient-2-mid2': '#9797B1',
         'gradient-2-end1': '#B8C7D0',
         'gradient-2-end2': '#ABBCC7',
-      }
+      },
+      animation: {
+        scroll: 'scroll 40s linear infinite',
+      },
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
     },
   },
   plugins: [],

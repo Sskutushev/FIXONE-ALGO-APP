@@ -1,3 +1,4 @@
+// This is a test comment from Gemini. If you see this, App.js is updating correctly.
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
@@ -96,22 +97,98 @@ const Button = ({ children, variant = 'big-classic', icon: Icon, iconPosition = 
 };
 
 const StrategyCard = ({ title, description, imageSrc }) => (
-  <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+  <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col border border-gray-700">
     <div className="relative">
-      <img src={imageSrc} alt={title} className="w-full h-32 object-cover" />
+      <img src={imageSrc} alt={title} className="w-full h-24 object-cover" />
       <div className="absolute top-0 left-0 bg-[#66A1BF] text-white font-bold text-sm px-3 py-1 m-2 rounded-full">
         Алго-бот
       </div>
     </div>
-    <div className="p-4 flex flex-col flex-grow">
-      <h3 className="font-bold text-lg mb-2">{title}</h3>
-      <p className="text-sm text-gray-600 flex-grow">{description}</p>
-      <div className="mt-4">
-          <Button variant="big-outline" className="w-full !border-[#868686] !bg-[#E3E3E3] !text-black hover:!bg-[#868686] hover:!text-white">Подробнее</Button>
+    <div className="p-3 flex flex-col flex-grow">
+      <h3 className="font-bold text-base mb-1">{title}</h3>
+      <p className="text-xs text-gray-600 flex-grow">{description}</p>
+      <div className="mt-3">
+          <Button variant="small-outline" className="w-full !border-[#868686] !bg-[#E3E3E3] !text-black hover:!bg-[#868686] hover:!text-white">Подробнее</Button>
       </div>
     </div>
   </div>
 );
+
+const PartnersCarousel = () => {
+    const partnerLogos = [
+        'amts.svg', 'b2broker.svg', 'binance.svg', 'bybit.svg', 'dexnet.svg', 
+        'kraken.svg', 'metaquotes.svg', 'profixone.svg', 'stmt.svg'
+    ];
+
+    return (
+        <div 
+            className="relative w-full overflow-hidden"
+            style={{
+                maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+            }}
+        >
+            <div className="flex animate-scroll">
+                {[...partnerLogos, ...partnerLogos].map((logo, index) => (
+                    <div key={index} className="flex-shrink-0 w-1/4 p-8">
+                        <img src={`${process.env.PUBLIC_URL}/${logo}`} alt={`partner logo ${index + 1}`} className="h-12 mx-auto" />
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const HowItWorksSection = () => {
+    const steps = [
+        { 
+            step: 1, 
+            title: 'Регистрация и KYC', 
+            explanation: 'Создаёте аккаунт и проходите быструю верификацию личности.' 
+        },
+        { 
+            step: 2, 
+            title: 'Пополнение', 
+            explanation: 'Вносите депозит удобным способом (карта, криптовалюта, перевод).' 
+        },
+        { 
+            step: 3, 
+            title: 'Выбор/Создание бота', 
+            explanation: 'Подбираете готового алгоритмического бота или настраиваете собственную стратегию.' 
+        },
+        { 
+            step: 4, 
+            title: 'Запуск и мониторинг', 
+            explanation: 'Запускаете торговлю и контролируете результат в терминале Fixone MetaTrader 5, либо прямо на платформе.' 
+        },
+    ];
+
+    return (
+        <div className="container mx-auto">
+            <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">Как это работает?</h2>
+            <div className="relative">
+                <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-auto hidden md:block" />
+                <div className="relative grid grid-cols-1 md:grid-cols-4 gap-y-16 md:gap-x-8">
+                    {steps.map((item, index) => (
+                        <div key={item.step} className="flex flex-col items-center">
+                            <div className={`relative p-6 rounded-[60px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
+                                <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-16 w-16" />
+                                <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
+                                    Шаг {item.step}
+                                </div>
+                                <h3 className="font-bold text-xl mt-8 text-left">{item.title}</h3>
+                            </div>
+                            <div className="mt-[30px] p-4 bg-gray-700 text-white rounded-[60px] w-full text-center">
+                                <p>{item.explanation}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 
 //=========== LANDING PAGE ===========//
 const LandingPage = () => {
@@ -134,8 +211,8 @@ const LandingPage = () => {
   ];
 
   const sections = [
-      { id: 'partners', title: 'Наши партнёры' },
-      { id: 'how-it-works', title: 'Как это работает' },
+      { id: 'partners', title: 'Наши партнёры', component: <PartnersCarousel /> },
+      { id: 'how-it-works', title: 'Как это работает', component: <HowItWorksSection /> },
       { id: 'showcase', title: 'Витрина алго-ботов' },
       { id: 'builder', title: 'Конструктор ботов' },
       { id: 'terminal', title: 'Все рынки-один терминал' },
@@ -199,9 +276,9 @@ const LandingPage = () => {
 
       {/* Hero Section */}
         <section id="hero" className="bg-bg-light" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundImage.svg)`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-8">
+            <div className="container mx-auto px-6 py-16 flex flex-col md:flex-row items-start gap-8">
                 {/* Left Column */}
-                <div className="md:w-1/2 text-center md:text-left">
+                <div className="md:w-1/2 text-center md:text-left pt-8">
                     <h1 className="font-tt-travels text-5xl font-bold mb-4">Создавай. Запускай. Зарабатывай.</h1>
                     <p className="text-xl text-text-grey max-w-2xl mx-auto md:mx-0 mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
                     <p className="text-xl text-text-grey max-w-2xl mx-auto md:mx-0 mb-8">Своя биржа, терминал на базе MetaTrader 5, низкие комиссии и готовые алго-боты — от долгосрока до скальпинга.</p>
@@ -220,81 +297,19 @@ const LandingPage = () => {
             </div>
         </section>
       
-      {/* New Sections */}
-      {sections.slice(0, 7).map((section, index) => (
+      {/* Sections */} 
+      {sections.map((section, index) => (
         <section key={section.id} id={section.id} className={`py-20 px-6 ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
-            <div className="container mx-auto">
-                <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>
-                <p className="text-center text-text-grey">Содержимое этого раздела будет добавлено позже.</p>
-            </div>
+            {section.component ? 
+                <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>{section.component}</div> : 
+                (
+                <div className="container mx-auto">
+                    <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>
+                    <p className="text-center text-text-grey">Содержимое этого раздела будет добавлено позже.</p>
+                </div>
+            )}
         </section>
       ))}
-
-      {/* About Us Section */}
-      <section id="about" className="py-20 px-6 bg-bg-light">
-        <div className="container mx-auto">
-            <h2 className="font-tt-travels text-4xl font-bold mb-4 text-left">О нас</h2>
-            <p className="text-lg text-text-grey mb-12 text-left">Мы создаём комфортную среду для алготрейдинга и автоматических стратегий.
-Компания Fixone Global Trading основана для того, чтобы каждый трейдер и инвестор мог зарабатывать на международных рынках без препятствий и лишних барьеров. Опираясь на опыт работы с 2019 года и десятки успешно реализованных стратегий, мы сделали ставку на автоматизацию и алго-ботов, которые позволяют стабильно работать в любых рыночных условиях. Наши решения подходят для скальперов, арбитражёров, криптотрейдеров, алготрейдеров, управляющих и частных инвесторов. В торговом терминале Fixone MetaTrader 5 доступны все стратегии — от классических тактик до продвинутых алгоритмических моделей, полностью готовых к интеграции с ботами. Fixone — это надёжная экосистема, где идеи превращаются в алгоритмы, а алгоритмы — в прибыль.</p>
-            <div className="flex flex-col lg:flex-row items-stretch gap-8">
-                {/* Left Column: Image */}
-                <div className="lg:w-2/5 w-full relative rounded-lg overflow-hidden">
-                    <img src={`${process.env.PUBLIC_URL}/igor.cbc61e98.webp`} alt="Игорь Ботнари" className="w-full h-full object-cover" />
-                    <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-4 w-full">
-                        <h3 className="font-bold text-xl">Игорь Ботнари</h3>
-                        <p className="text-sm">Генеральный директор и основатель</p>
-                    </div>
-                </div>
-                {/* Right Column: Timeline Cards */}
-                <div className="lg:w-3/5 w-full flex flex-col gap-6">
-                    {/* Card 2019 */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg relative flex-grow">
-                        <img src={`${process.env.PUBLIC_URL}/profitway.1c6e10dc.svg`} alt="Profitway Logo" className="absolute top-4 left-4 h-8"/>
-                        <div className="absolute top-4 right-4 bg-[#FF2B00] text-white font-bold px-3 py-1 rounded-full text-sm">2019</div>
-                        <ul className="mt-16 space-y-2">
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Запуск первых инвестиционных продуктов</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Начало пути к созданию собственной экосистемы</span></li>
-                        </ul>
-                    </div>
-                    {/* Card 2021 */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg relative flex-grow">
-                        <img src={`${process.env.PUBLIC_URL}/profixone.25e89bb0.svg`} alt="Profixone Logo" className="absolute top-4 left-4 h-8"/>
-                        <div className="absolute top-4 right-4 bg-[#FF2B00] text-white font-bold px-3 py-1 rounded-full text-sm">2021</div>
-                        <ul className="mt-16 space-y-2">
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Создана компания с инновационными инвестиционными решениями</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Выпуск собственных криптотокенов и NFT</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Запуск брокерской компании на базе White Label</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Миллионные прибыли партнёров и международные награды</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Объединение трейдеров во главе с Игорем Ботнари</span></li>
-                        </ul>
-                    </div>
-                    {/* Card 2023 */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg relative flex-grow">
-                        <img src={`${process.env.PUBLIC_URL}/fixone.e30be817.svg`} alt="Fixone Logo" className="absolute top-4 left-4 h-8"/>
-                        <div className="absolute top-4 right-4 bg-[#FF2B00] text-white font-bold px-3 py-1 rounded-full text-sm">2023</div>
-                        <ul className="mt-16 space-y-2">
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Внедрение собственного торгового терминала Fixone MetaTrader 5</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Интеграция криптобиржи и поставщиков ликвидности</span></li>
-                            <li className="flex items-center gap-2"><ICONS.check className="text-green-500 w-5 h-5 flex-shrink-0" /><span>Поддержка всех типов инструментов: от классических до криптографических</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </section>
-
-      <section id="faq" className="py-20 px-6 bg-white">
-        <div className="container mx-auto">
-            <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">FAQ</h2>
-            <p className="text-center text-text-grey">Содержимое этого раздела будет добавлено позже.</p>
-        </div>
-      </section>
-      <section id="start-bot" className="py-20 px-6 bg-bg-light">
-        <div className="container mx-auto">
-            <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">Запустите первого бота сегодня</h2>
-            <p className="text-center text-text-grey">Содержимое этого раздела будет добавлено позже.</p>
-        </div>
-      </section>}}
 
       {/* Footer */}
       <footer className="bg-white py-8 px-6 text-text-grey">
