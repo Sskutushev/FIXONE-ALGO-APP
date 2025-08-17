@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/TOT-ALGO-APP/static/css/main.40d34978.css",
-    "main.js": "/TOT-ALGO-APP/static/js/main.9dc05092.js",
+    "main.css": "/TOT-ALGO-APP/static/css/main.4cdfd906.css",
+    "main.js": "/TOT-ALGO-APP/static/js/main.24e46382.js",
     "static/js/453.ec1a3a7f.chunk.js": "/TOT-ALGO-APP/static/js/453.ec1a3a7f.chunk.js",
     "index.html": "/TOT-ALGO-APP/index.html",
-    "main.40d34978.css.map": "/TOT-ALGO-APP/static/css/main.40d34978.css.map",
-    "main.9dc05092.js.map": "/TOT-ALGO-APP/static/js/main.9dc05092.js.map",
+    "main.4cdfd906.css.map": "/TOT-ALGO-APP/static/css/main.4cdfd906.css.map",
+    "main.24e46382.js.map": "/TOT-ALGO-APP/static/js/main.24e46382.js.map",
     "453.ec1a3a7f.chunk.js.map": "/TOT-ALGO-APP/static/js/453.ec1a3a7f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.40d34978.css",
-    "static/js/main.9dc05092.js"
+    "static/css/main.4cdfd906.css",
+    "static/js/main.24e46382.js"
   ]
 }
