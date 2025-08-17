@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AuthPage from './pages/AuthPage';
 
 //=========== ICONS (SVG) ===========//
@@ -234,7 +234,8 @@ const LandingPage = () => {
       <section id="about" className="py-20 px-6 bg-bg-light">
         <div className="container mx-auto">
             <h2 className="font-tt-travels text-4xl font-bold mb-4 text-left">О нас</h2>
-            <p className="text-lg text-text-grey mb-12 text-left">Мы делаем автоматическую торговлю доступной каждому — от начинающих трейдеров до управляющих фондами. Наш опыт с 2019 года, собственные продукты и команда профессионалов с капиталом $100+ млн позволяют каждому воплотить свои идеи и зарабатывать на мировых рынках.</p>
+            <p className="text-lg text-text-grey mb-12 text-left">Мы создаём комфортную среду для алготрейдинга и автоматических стратегий.
+Компания Fixone Global Trading основана для того, чтобы каждый трейдер и инвестор мог зарабатывать на международных рынках без препятствий и лишних барьеров. Опираясь на опыт работы с 2019 года и десятки успешно реализованных стратегий, мы сделали ставку на автоматизацию и алго-ботов, которые позволяют стабильно работать в любых рыночных условиях. Наши решения подходят для скальперов, арбитражёров, криптотрейдеров, алготрейдеров, управляющих и частных инвесторов. В торговом терминале Fixone MetaTrader 5 доступны все стратегии — от классических тактик до продвинутых алгоритмических моделей, полностью готовых к интеграции с ботами. Fixone — это надёжная экосистема, где идеи превращаются в алгоритмы, а алгоритмы — в прибыль.</p>
             <div className="flex flex-col lg:flex-row items-stretch gap-8">
                 {/* Left Column: Image */}
                 <div className="lg:w-2/5 w-full relative rounded-lg overflow-hidden">
