@@ -320,8 +320,14 @@ const LandingPage = () => {
             {section.id === 'about' ? (
                 <div className="max-w-7xl mx-auto px-4">
                     <h2 className="text-4xl font-bold text-left mb-4">О нас</h2>
-                    <p className="text-lg text-gray-700 mb-12 max-w-4xl">
-                        Мы создаём комфортную среду для алготрейдинга и автоматических стратегий. Компания Fixone Global Trading основана для того, чтобы каждый трейдер и инвестор мог зарабатывать на международных рынках без препятствий и лишних барьеров. Опираясь на опыт работы с 2019 года и десятки успешно реализованных стратегий, мы сделали ставку на автоматизацию и алго-ботов, которые позволяют стабильно работать в любых рыночных условиях. Наши решения подходят для скальперов, арбитражёров, криптотрейдеров, алготрейдеров, управляющих и частных инвесторов. В торговом терминале Fixone MetaTrader 5 доступны все стратегии — от классических тактик до продвинутых алгоритмических моделей, полностью готовых к интеграции с ботами. Fixone — это надёжная экосистема, где идеи превращаются в алгоритмы, а алгоритмы — в прибыль.
+                    <p className="text-lg text-gray-700 mb-4">
+                        Мы создаём комфортную среду для алготрейдинга и автоматических стратегий. Компания Fixone Global Trading основана для того, чтобы каждый трейдер и инвестор мог зарабатывать на международных рынках без препятствий и лишних барьеров. Опираясь на опыт работы с 2019 года и десятки успешно реализованных стратегий, мы сделали ставку на автоматизацию и алго-ботов, которые позволяют стабильно работать в любых рыночных условиях.
+                    </p>
+                    <p className="text-lg text-gray-700 mb-4">
+                        Наши решения подходят для скальперов, арбитражёров, криптотрейдеров, алготрейдеров, управляющих и частных инвесторов. В торговом терминале Fixone MetaTrader 5 доступны все стратегии — от классических тактик до продвинутых алгоритмических моделей, полностью готовых к интеграции с ботами.
+                    </p>
+                    <p className="text-xl font-bold text-gray-700 mb-12">
+                        Fixone — это надёжная экосистема, где идеи превращаются в алгоритмы, а алгоритмы — в прибыль.
                     </p>
 
                     <div className="flex flex-col lg:flex-row gap-12">
@@ -375,17 +381,17 @@ const LandingPage = () => {
                                     <img
                                         src={`${process.env.PUBLIC_URL}/${achievement.logo}`}
                                         alt="Company Logo"
-                                        className="absolute top-4 left-4 w-12 h-12 object-contain"
+                                        className={`absolute ${achIndex === 0 ? 'top-4' : 'top-[-1rem]'} left-4 object-contain ${achIndex === 0 ? 'w-12 h-12' : 'w-24 h-24'}`}
                                     />
                                     {/* Year Plaque */}
-                                    <div className="absolute top-4 right-4 bg-gray-200 text-gray-800 text-sm font-bold px-3 py-1 rounded-full">
+                                    <div className="absolute top-4 right-4 bg-[#EFA46F] text-white text-sm font-bold px-3 py-1 rounded-full">
                                         {achievement.year}
                                     </div>
                                     <ul className="mt-12 space-y-2">
                                         {achievement.items.map((item, itemIndex) => (
                                             <li key={itemIndex} className="flex items-start text-gray-700">
                                                 {/* Green Checkmark Icon */}
-                                                <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <svg className="w-5 h-5 text-[#25DE85] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                                 </svg>
                                                 <span>{item}</span>
