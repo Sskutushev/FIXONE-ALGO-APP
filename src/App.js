@@ -4,6 +4,7 @@ import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AlgoBotShowcase from './components/AlgoBotShowcase';
 import BotDetailModal from './components/BotDetailModal';
 import AuthPage from './pages/AuthPage';
+import FaqSection from './components/FaqSection';
 
 //=========== ICONS (SVG) ===========//
 const ICONS = {
@@ -47,28 +48,6 @@ const ICONS = {
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   ),
-  instagram: (props) => (
-    <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-    </svg>
-  ),
-  telegram: (props) => (
-    <svg {...props} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M21.9,2.1A1,1,0,0,0,20.5,.2L.9,8.8A1,1,0,0,0,1.8,11l8.1,2.9,2.9,8.1a1,1,0,0,0,1.9-.9L23.8,3.5A1,1,0,0,0,21.9,2.1Z"/>
-    </svg>
-  ),
-  facebook: (props) => (
-    <svg {...props} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.23v2.355H7.079v3.209h3.002v8.196h3.316z"/>
-    </svg>
-  ),
-  youtube: (props) => (
-    <svg {...props} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M21.58 7.19C21.35 6.45 20.82 5.92 20.08 5.7C18.34 5.25 12 5.25 12 5.25s-6.34 0-8.08.45C3.18 5.92 2.65 6.45 2.42 7.19C1.98 8.93 1.98 12 1.98 12s0 3.07.44 4.81c.23.74.76 1.27 1.5 1.49C5.66 18.75 12 18.75 12 18.75s6.34 0 8.08-.45c.74-.22 1.27-.75 1.5-1.49.44-1.74.44-4.81.44-4.81s0-3.07-.44-4.81zM9.75 15.5V8.5l6.5 3.5-6.5 3.5z"/>
-    </svg>
-  ),
   check: (props) => (
     <svg {...props} viewBox="0 0 24 24" fill="none">
       <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -97,8 +76,6 @@ const Button = ({ children, variant = 'big-classic', icon: Icon, iconPosition = 
   const effectiveClassName = `${baseStyles} ${variantStyles[variant]} ${className}`;
   return <button className={effectiveClassName} {...props}>{Icon && iconPosition === 'left' && <Icon className="mr-2" />}{children}{Icon && iconPosition === 'right' && <Icon className="ml-2" />}</button>;
 };
-
-
 
 const PartnersCarousel = () => {
     const partnerLogos = [
@@ -161,10 +138,6 @@ const HowItWorksSection = () => {
                         <div key={item.step} className={`flex flex-col items-center ${index === 0 ? 'mt-[-150px]' : index === 1 ? 'mt-[-100px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
                             <div className={`relative p-6 rounded-[30px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
                                 <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-24 w-24" />
-                                {item.step === 1 && <img src={`${process.env.PUBLIC_URL}/registration&KYC.svg`} alt="Registration Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
-                                {item.step === 2 && <img src={`${process.env.PUBLIC_URL}/transaction.svg`} alt="Transaction Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
-                                {item.step === 3 && <img src={`${process.env.PUBLIC_URL}/Submit.svg`} alt="Submit Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
-                                {item.step === 4 && <img src={`${process.env.PUBLIC_URL}/analytics_set.svg`} alt="Analytics Icon" className="absolute -top-4 left-1/2 transform -translate-x-1/2 ml-0 w-16 h-16" />}
                                 <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
                                     Шаг {item.step}
                                 </div>
@@ -179,6 +152,191 @@ const HowItWorksSection = () => {
             </div>
         </div>
     );
+};
+
+const TerminalSection = () => {
+  const features = [
+    "Удобный и современный интерфейс",
+    "Полностью настраиваемые диаграммы",
+    "Поддержка торговых консультантов (алгоботов)",
+    "Встроенный экономический календарь",
+    "DOM (глубина рынка)",
+    "Доступно для Windows и Mac",
+    "38+ предустановленных технических индикаторов",
+    "44 аналитических инструмента",
+    "3 типа графиков и 21 таймфрейм",
+    "Дополнительные типы отложенных ордеров (стоп-лимит на продажу и покупку)",
+    "Отсоединение диаграмм",
+    "Торговля в один клик прямо на графике",
+    "Трейлинг-стоп",
+  ];
+
+  const downloadButtons = [
+    { imageSrc: 'win.svg', label: 'Windows', href: `${process.env.PUBLIC_URL}/fixoneglobaltrading5setup.exe`, download: true },
+    { imageSrc: 'mac.svg', label: 'macOS', href: `${process.env.PUBLIC_URL}/MetaTrader5.pkg.zip`, download: true },
+    { imageSrc: 'andr.svg', label: 'Android', href: 'https://play.google.com/store/apps/details?id=net.metaquotes.metatrader5&hl=ru&referrer=ref_id%3d5059843646823681542%26server%3dFixoneGlobalTrading-Live', download: false },
+    { imageSrc: 'ios.svg', label: 'iOS', href: 'https://apps.apple.com/ru/app/metatrader-5/id413251709', download: false },
+    { imageSrc: 'web.svg', label: 'Webtrader', href: 'https://mt5.fixoneglobal.com/terminal', download: false },
+  ];
+
+  return (
+    <div className="container mx-auto">
+      <div className="flex flex-col md:flex-row items-center mb-12">
+        <h2 className="font-tt-travels text-4xl font-bold text-left flex-shrink-0">Торговый терминал Fixone MetaTrader 5</h2>
+        <p className="text-text-grey text-left text-lg font-semibold ml-[35px]">Все инструменты для алгоритмической и ручной торговли в одном месте — быстро, удобно и без ограничений.</p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+        {/* Left Column */}
+        <div>
+          <ul className="space-y-4 mb-8 columns-2">
+            {features.map((feature, index) => (
+              <li key={index} className="flex items-center mb-2">
+                <ICONS.check className="w-5 h-5 text-[#25DE85] mr-3 flex-shrink-0" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="p-6 rounded-lg mt-12 text-white" style={{backgroundImage: 'linear-gradient(to bottom, #E28AA4, #ABBCC7)'}}>
+            <h3 className="font-bold text-xl mb-4 text-black">Скачайте приложение</h3>
+            <div className="flex justify-between">
+              {downloadButtons.map(btn => (
+                  <a 
+                    href={btn.href} 
+                    key={btn.label} 
+                    className="flex flex-col items-center text-gray-800 hover:text-black transition-transform duration-200 hover:scale-110 active:scale-100"
+                    target={!btn.download ? "_blank" : "_self"}
+                    rel={!btn.download ? "noopener noreferrer" : ""}
+                    download={btn.download}
+                  >
+                    <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center overflow-hidden">
+                       <img src={`${process.env.PUBLIC_URL}/${btn.imageSrc}`} alt={btn.label} className="w-8 h-8 filter grayscale brightness-50" />
+                    </div>
+                    <span className="text-sm mt-2 font-bold">{btn.label}</span>
+                  </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        {/* Right Column */}
+        <div className="flex items-center justify-center h-full">
+          <img src={`${process.env.PUBLIC_URL}/device 1.svg`} alt="Fixone MetaTrader 5 on multiple devices" className="w-full h-auto"/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AdvantagesSection = () => {
+  const advantages = [
+    {
+      imageSrc: 'im1.svg',
+      title: 'Всё в одном месте',
+      description: 'Управляйте активами, торговлей и ботами в едином интерфейсе. Полный контроль без переключения между платформами.'
+    },
+    {
+      imageSrc: 'im2.svg',
+      title: 'MT5-терминал',
+      description: 'Используйте мощь MetaTrader 5: проверенная стабильность, высокая скорость и привычные инструменты для профессионального трейдинга.'
+    },
+    {
+      imageSrc: 'im3.svg',
+      title: 'Ликвидность и скорость',
+      description: 'Получайте лучшие цены благодаря высокой ликвидности и моментальному исполнению ордеров с минимальным проскальзыванием.'
+    },
+    {
+      imageSrc: 'im4.svg',
+      title: 'Алгоритмы и автоторговля 24/7',
+      description: 'Автоматизируйте свою торговлю. Наши алгоритмы и торговые роботы работают для вас круглосуточно, 24/7.'
+    },
+    {
+      imageSrc: 'im5.svg',
+      title: 'Мониторинг и алерты',
+      description: 'Мгновенные оповещения об изменениях баланса и сделок. Держите руку на пульсе вашего портфеля.'
+    },
+    {
+      imageSrc: 'im6.svg',
+      title: 'API и интеграции',
+      description: 'Расширяйте функционал и автоматизируйте процессы с помощью нашего открытого и гибкого API для разработчиков.'
+    },
+  ];
+
+  const nonHighlightedCards = ['Алгоритмы и автоторговля 24/7', 'MT5-терминал', 'API и интеграции'];
+
+  return (
+    <div className="container mx-auto px-16">
+      <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {advantages.map((advantage, index) => {
+          const isHighlighted = !nonHighlightedCards.includes(advantage.title);
+          return (
+            <div 
+              key={index} 
+              className={`p-4 rounded-lg shadow-lg flex items-start space-x-4 ${isHighlighted ? '' : 'bg-white'}`}
+              style={isHighlighted ? { backgroundColor: '#C2C2C2' } : {}}
+            >
+              <div className="flex-shrink-0">
+                <img src={`${process.env.PUBLIC_URL}/${advantage.imageSrc}`} alt="" className="w-12 h-12" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">{advantage.title}</h3>
+                <p className={isHighlighted ? 'text-gray-800' : 'text-text-grey'}>{advantage.description}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const SecuritySection = () => {
+  const securityCards = [
+    {
+      imageSrc: 'defens.svg',
+      title: 'Защита доступа',
+      description: '2FA аутентификация и персонализированные уровни доступа'
+    },
+    {
+      imageSrc: 'moni.svg',
+      title: 'Шифрование и мониторинг',
+      description: 'Шифрование всех операций и автоматическое выявление подозрительных действий'
+    },
+    {
+      imageSrc: 'save.svg',
+      title: 'Надёжное хранение',
+      description: 'Большая часть средств хранится офлайн для максимальной безопасности'
+    },
+    {
+      imageSrc: 'reg.svg',
+      title: 'Соответствие стандартам',
+      description: 'Полное соответствие международным стандартам и требованиям регуляторов'
+    },
+  ];
+
+  return (
+    <div className="container mx-auto px-16">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+        <div>
+          <h2 className="font-tt-travels text-4xl font-bold">Безопасность и доверие</h2>
+          <p className="text-lg text-text-grey mt-4 max-w-3xl">Ваши средства и данные защищены на всех уровнях: от входа до хранения и транзакций</p>
+        </div>
+        <div className="mt-8 md:mt-0 p-4 rounded-[50px] text-white font-bold bg-gradient-to-r from-[#ABBCC7] via-[#BBC7CD] via-[#9797B1] via-[#E19C96] to-[#E28AA4]">
+          Безопасность средств — приоритет №1
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row gap-4">
+        {securityCards.map((card, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg border border-gray-300 shadow-lg flex flex-col items-start text-left h-full">
+              <div className="flex items-center mb-4">
+                <img src={`${process.env.PUBLIC_URL}/${card.imageSrc}`} alt={card.title} className="w-12 h-12 mr-4 flex-shrink-0" />
+                <h3 className="text-xl font-bold">{card.title}</h3>
+              </div>
+              <p className="text-text-grey">{card.description}</p>
+            </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 
@@ -219,11 +377,11 @@ const LandingPage = () => {
       { id: 'how-it-works', title: 'Как это работает?', component: <HowItWorksSection /> },
       { id: 'showcase', title: 'Витрина алго-ботов', component: <AlgoBotShowcase botsData={strategyCards} onOpenModal={handleOpenModal} /> },
       { id: 'builder', title: 'Конструктор ботов' },
-      { id: 'terminal', title: 'Все рынки-один терминал' },
-      { id: 'advantages', title: 'Наши преимущества' },
-      { id: 'security', title: 'Безопасность и соответствие' },
+      { id: 'terminal', title: 'Все рынки-один терминал', component: <TerminalSection /> },
+      { id: 'advantages', title: 'Наши преимущества', component: <AdvantagesSection /> },
+      { id: 'security', title: 'Безопасность и соответствие', component: <SecuritySection /> },
       { id: 'about', title: 'О нас' },
-      { id: 'faq', title: 'FAQ' },
+      { id: 'faq', title: 'FAQ', component: <FaqSection /> },
       { id: 'start-bot', title: 'Запустите первого бота сегодня' },
   ];
 
@@ -250,7 +408,7 @@ const LandingPage = () => {
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/auth"><Button variant="text" className="!border-[#FF2B00] !text-[#FF2B00] !border-2 !px-8 !py-3">Войти</Button></Link>
+            <Link to="/auth"><Button variant="text" className="!border-[#25DE85] !text-[#25DE85] !border-2 !px-8 !py-3">Войти</Button></Link>
             <Link to="/auth"><Button variant="big-classic">Открыть счёт</Button></Link>
           </div>
           <div className="md:hidden">
@@ -293,7 +451,7 @@ const LandingPage = () => {
       
       {/* Sections */} 
       {sections.map((section, index) => (
-        <section key={section.id} id={section.id} className={`py-20 px-[10px] ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
+        <section key={section.id} id={section.id} className={`py-20 ${section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? 'px-16' : 'px-[10px]'} ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
             {section.id === 'about' ? (
                 <div className="max-w-7xl mx-auto px-4">
                     <h2 className="text-4xl font-bold text-left mb-4">О нас</h2>
@@ -382,7 +540,7 @@ const LandingPage = () => {
                 </div>
             ) : (
                 section.component ?
-                    <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div> :
+                    (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? section.component : <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div>) :
                     (
                         <div className="container mx-auto">
                             <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>
@@ -399,10 +557,18 @@ const LandingPage = () => {
             <hr className="border-gray-300" />
             <div className="flex justify-center items-center gap-6 my-6">
                 <a href="https://x.com/FixoneExchange" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black"><ICONS.twitter /></a>
-                <a href="https://www.instagram.com/fixoneglobal/?igshid=MWZjMTM2ODFkZg%3D%3D" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black"><ICONS.instagram /></a>
-                <a href="https://t.me/fixone_exchange" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black"><ICONS.telegram /></a>
-                <a href="https://www.facebook.com/people/Fixone-Global-Exchange/100090337835479/" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black"><ICONS.facebook /></a>
-                <a href="https://www.youtube.com/@FIXONEGlobalTrading" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black"><ICONS.youtube /></a>
+                <a href="https://www.instagram.com/fixoneglobal/?igshid=MWZjMTM2ODFkZg%3D%3D" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                    <img src={`${process.env.PUBLIC_URL}/inst.svg`} alt="Instagram" className="w-full h-full" />
+                </a>
+                <a href="https://t.me/fixone_exchange" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                    <img src={`${process.env.PUBLIC_URL}/teleg.svg`} alt="Telegram" className="w-full h-full" />
+                </a>
+                <a href="https://www.facebook.com/people/Fixone-Global-Exchange/100090337835479/" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                    <img src={`${process.env.PUBLIC_URL}/face.svg`} alt="Facebook" className="w-full h-full" />
+                </a>
+                <a href="https://www.youtube.com/@FIXONEGlobalTrading" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                    <img src={`${process.env.PUBLIC_URL}/ytub.svg`} alt="YouTube" className="w-full h-full" />
+                </a>
             </div>
             <hr className="border-gray-300" />
             <div className="my-6 text-xs text-gray-500 text-left">

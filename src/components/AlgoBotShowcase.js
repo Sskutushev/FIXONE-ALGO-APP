@@ -32,7 +32,7 @@ const ShowcaseBotCard = ({ title, description, imageSrc, onOpenModal, botData })
       <div className="absolute bottom-0 left-0 right-0 p-3">
           <Button
             variant="small-outline"
-            className="w-full !border-[#868686] !bg-[#E3E3E3] !text-black hover:!bg-[#868686] hover:!text-white !py-4"
+            className="w-full !border-[#868686] !bg-[#E3E3E3] !text-black hover:!bg-[#25DE85] hover:!text-white hover:!border-[#25DE85] active:!bg-[#1f9d6d] active:!border-[#1f9d6d] !py-4"
             onClick={() => onOpenModal(botData)}
           >
             Подробнее
@@ -62,9 +62,9 @@ const AlgoBotShowcase = ({ botsData, onOpenModal }) => {
                 ))}
             </div>
 
-            <div className="flex items-center justify-center mt-12 p-4 bg-gray-100 rounded-lg max-w-4xl mx-auto">
+            <div className="flex items-center justify-center mt-12 p-4 rounded-[50px] max-w-4xl mx-auto text-white bg-gradient-to-r from-[#ABBCC7] to-[#E28AA4]">
                 <img src={`${process.env.PUBLIC_URL}/warning 1.svg`} alt="Warning" className="w-[50px] h-[50px] mr-4" />
-                <p className="text-xs text-text-grey">
+                <p className="text-xs">
                     Алготрейдинг — это инструмент с потенциальной доходностью, но и с рисками. Данный материал не является инвестсоветом.
                 </p>
             </div>
