@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/TOT-ALGO-APP/static/css/main.4cdfd906.css",
-    "main.js": "/TOT-ALGO-APP/static/js/main.24e46382.js",
-    "static/js/453.ec1a3a7f.chunk.js": "/TOT-ALGO-APP/static/js/453.ec1a3a7f.chunk.js",
-    "index.html": "/TOT-ALGO-APP/index.html",
-    "main.4cdfd906.css.map": "/TOT-ALGO-APP/static/css/main.4cdfd906.css.map",
-    "main.24e46382.js.map": "/TOT-ALGO-APP/static/js/main.24e46382.js.map",
-    "453.ec1a3a7f.chunk.js.map": "/TOT-ALGO-APP/static/js/453.ec1a3a7f.chunk.js.map"
+    "main.css": "/FIXONE-ALGO-APP/static/css/main.4cdfd906.css",
+    "main.js": "/FIXONE-ALGO-APP/static/js/main.5d3c1316.js",
+    "static/js/453.ec1a3a7f.chunk.js": "/FIXONE-ALGO-APP/static/js/453.ec1a3a7f.chunk.js",
+    "index.html": "/FIXONE-ALGO-APP/index.html",
+    "main.4cdfd906.css.map": "/FIXONE-ALGO-APP/static/css/main.4cdfd906.css.map",
+    "main.5d3c1316.js.map": "/FIXONE-ALGO-APP/static/js/main.5d3c1316.js.map",
+    "453.ec1a3a7f.chunk.js.map": "/FIXONE-ALGO-APP/static/js/453.ec1a3a7f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4cdfd906.css",
-    "static/js/main.24e46382.js"
+    "static/js/main.5d3c1316.js"
   ]
 }
