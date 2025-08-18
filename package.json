@@ -2,7 +2,7 @@
   "name": "algoverse",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sskutushev.github.io/TOT-ALGO-APP/",
+  "homepage": "https://sskutushev.github.io/FIXONE-ALGO-APP/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
