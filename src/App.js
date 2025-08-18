@@ -98,20 +98,7 @@ const Button = ({ children, variant = 'big-classic', icon: Icon, iconPosition = 
   return <button className={effectiveClassName} {...props}>{Icon && iconPosition === 'left' && <Icon className="mr-2" />}{children}{Icon && iconPosition === 'right' && <Icon className="ml-2" />}</button>;
 };
 
-const StrategyCard = ({ title, description, imageSrc }) => (
-  <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col border border-gray-700 my-[10px]">
-    <div className="relative flex justify-center items-start">
-      <img src={imageSrc} alt={title} className="w-full h-24 object-cover" />
-      <div className="absolute top-0 left-0 bg-[#66A1BF] text-white font-bold text-sm px-3 py-1 m-2 rounded-full">
-        Алго-бот
-      </div>
-    </div>
-    <div className="p-3 flex flex-col pb-5">
-      <h3 className="font-bold text-base mb-1">{title}</h3>
-      <p className="text-xs text-gray-600 flex-grow">{description}</p>
-    </div>
-  </div>
-);
+
 
 const PartnersCarousel = () => {
     const partnerLogos = [
@@ -293,23 +280,13 @@ const LandingPage = () => {
 
       {/* Hero Section */}
         <section id="hero" className="bg-bg-light" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundImage.svg)`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="container mx-auto px-6 py-16 flex flex-col md:flex-row items-start gap-8">
-                {/* Left Column */}
-                <div className="md:w-1/2 text-center md:text-left pt-8">
-                    <h1 className="font-tt-travels text-5xl font-bold mb-4">Создавай. Запускай. Зарабатывай.</h1>
-                    <p className="text-xl text-text-grey max-w-2xl mx-auto md:mx-0 mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
-                    <p className="text-xl text-text-grey max-w-2xl mx-auto md:mx-0 mb-8">Своя биржа, терминал на базе MetaTrader 5, низкие комиссии и готовые алго-боты — от долгосрока до скальпинга.</p>
-                    <div className="md:text-left">
-                        <Link to="/auth"><Button variant="big-with-arrow">Присоединиться</Button></Link>
-                    </div>
-                </div>
-                {/* Right Column */}
-                <div className="md:w-1/2 w-full mt-8 md:mt-0">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {strategyCards.map((card, index) => (
-                            <StrategyCard key={index} {...card} />
-                        ))}
-                    </div>
+            <div className="container mx-auto px-6 py-24 flex items-center justify-center">
+                {/* Centered & Left-Aligned Content */}
+                <div className="max-w-7xl text-center">
+                    <h1 className="font-tt-travels text-5xl font-bold mb-6">Создавай. Запускай. Зарабатывай.</h1>
+                    <p className="text-xl text-text-grey max-w-6xl mx-auto mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
+                    <p className="text-xl text-text-grey max-w-6xl mx-auto mb-10">Своя биржа, терминал на базе MetaTrader 5, низкие комиссии и готовые алго-боты — от долгосрока до скальпинга.</p>
+                    <Link to="/auth"><Button variant="big-with-arrow">Присоединиться</Button></Link>
                 </div>
             </div>
         </section>
