@@ -142,9 +142,9 @@ const BotDetailModal = ({ isOpen, onClose, bot }) => {
   );
 
   const renderStatisticsTab = ({ showCalendar, setShowCalendar, currentMonth, setCurrentMonth, currentYear, setCurrentYear, selectedStartDate, setSelectedStartDate, selectedEndDate, setSelectedEndDate, handlePrevMonth, handleNextMonth, handleDateClick, isSelected, monthNames, weekdayNames, days, tradingPairs }) => (
-    <div className="p-6">
-      <div className="flex space-x-4 mb-4"> 
-        <div className="flex-1"> 
+    <div className="p-4 sm:p-6">
+      <div className="flex flex-col md:flex-row md:space-x-4 mb-4"> 
+        <div className="flex-1 mb-4 md:mb-0"> 
           <label htmlFor="pair-select-stats" className="block text-sm font-medium text-gray-700 mb-2">Пара</label>
           <select id="pair-select-stats" name="pair-select-stats" className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-main focus:border-main sm:text-sm rounded-md">
             {tradingPairs.map((pair, index) => (
@@ -166,10 +166,10 @@ const BotDetailModal = ({ isOpen, onClose, bot }) => {
             readOnly
           />
           {showCalendar && (
-            <div className="absolute z-10 bg-white border border-gray-300 rounded-md shadow-lg mt-1 p-2"> 
+            <div className="absolute z-10 bg-white border border-gray-300 rounded-md shadow-lg mt-1 p-2 w-full sm:w-auto">
               <div className="flex justify-between items-center mb-2">
                 <button onClick={handlePrevMonth} className="px-2 py-1 rounded-md hover:bg-gray-100">&lt;</button>
-                <span className="font-medium">{monthNames[currentMonth]} {currentYear}</span>
+                <span className="font-medium text-sm">{monthNames[currentMonth]} {currentYear}</span>
                 <button onClick={handleNextMonth} className="px-2 py-1 rounded-md hover:bg-gray-100">&gt;</button>
               </div>
               <div className="grid grid-cols-7 gap-1 text-center text-xs">
@@ -190,7 +190,7 @@ const BotDetailModal = ({ isOpen, onClose, bot }) => {
       </div>
 
       <div className="flex items-center mb-4"> 
-        <div className="relative flex-grow h-64 bg-gray-50 border border-gray-300 rounded-md"> 
+        <div className="relative flex-grow h-48 sm:h-64 bg-gray-50 border border-gray-300 rounded-md"> 
             <span className="absolute top-2 right-2 text-xs text-gray-400">Результат</span>
             <div className="absolute inset-0 grid grid-cols-5 grid-rows-5 gap-0.5 p-2">
               {Array(25).fill().map((_, i) => <div key={i} className="border border-gray-200"></div>)}
@@ -200,7 +200,7 @@ const BotDetailModal = ({ isOpen, onClose, bot }) => {
             </svg>
             <span className="absolute bottom-2 left-2 text-xs text-gray-400">Дата</span>
           </div>
-          <div className="flex flex-col justify-between h-64 py-0 pr-1 text-xs text-gray-400 space-y-2"> 
+          <div className="flex flex-col justify-between h-48 sm:h-64 py-0 pr-1 text-xs text-gray-400 space-y-2"> 
               <span>100%</span>
               <span>75%</span>
               <span>50%</span>
@@ -224,8 +224,8 @@ const BotDetailModal = ({ isOpen, onClose, bot }) => {
   );
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={handleOverlayClick}>
-      <div className="bg-white rounded-[25px] border border-gray-300 w-[800px] max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={handleOverlayClick}>
+      <div className="bg-white rounded-[25px] border border-gray-300 w-full max-w-4xl max-h-[90vh] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
         <button onClick={onClose} className="absolute top-4 right-4 text-black z-10">
           <ICONS.close className="w-6 h-6" />
         </button>
@@ -236,8 +236,8 @@ const BotDetailModal = ({ isOpen, onClose, bot }) => {
           Алго-бот
         </div>
 
-        <div className="p-6">
-          <h2 className="text-2xl font-bold mb-2">{bot.title}</h2>
+        <div className="p-4 sm:p-6">
+          <h2 className="text-xl sm:text-2xl font-bold mb-2">{bot.title}</h2>
           <p className="text-sm text-gray-600 mb-4">{bot.description}</p>
 
           {/* Tabs */}

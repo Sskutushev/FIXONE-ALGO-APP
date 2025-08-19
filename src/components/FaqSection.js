@@ -28,7 +28,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
   return (
     <div className="border-b border-gray-200 py-4">
       <button
-        className="w-full flex justify-between items-center text-left text-lg font-semibold"
+        className="w-full flex justify-between items-center text-left text-base sm:text-lg font-semibold"
         onClick={onClick}
       >
         <span>{question}</span>

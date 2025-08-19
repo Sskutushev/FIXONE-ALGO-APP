@@ -6,7 +6,9 @@ import BotDetailModal from './components/BotDetailModal';
 import AuthPage from './pages/AuthPage';
 import CreateBotPage from './pages/CreateBotPage';
 import FaqSection from './components/FaqSection';
+import StartBotSection from './components/StartBotSection';
 import BotConstructorSection from './components/BotConstructorSection';
+import AnimatedSection from './components/AnimatedSection';
 
 //=========== ICONS (SVG) ===========//
 const ICONS = {
@@ -95,8 +97,8 @@ const PartnersCarousel = () => {
         >
             <div className="flex animate-scroll">
                 {[...partnerLogos, ...partnerLogos].map((logo, index) => (
-                    <div key={index} className="flex-shrink-0 w-1/4 p-8">
-                        <img src={`${process.env.PUBLIC_URL}/${logo}`} alt={`partner logo ${index + 1}`} className="h-12 mx-auto" />
+                    <div key={index} className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/4 p-4 sm:p-8">
+                        <img src={`${process.env.PUBLIC_URL}/${logo}`} alt={`partner logo ${index + 1}`} className="h-10 sm:h-12 mx-auto" />
                     </div>
                 ))}
             </div>
@@ -129,15 +131,15 @@ const HowItWorksSection = () => {
     ];
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto px-4">
             
-            <div className="relative mb-[-100px]">
+            <div className="relative md:mb-[-100px]">
                 <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="w-full h-auto hidden md:block" style={{ filter: 'brightness(1.5)' }} />
             </div>
-            <div className="relative mt-[100px]">
+            <div className="relative md:mt-[100px]">
                 <div className="relative grid grid-cols-1 md:grid-cols-4 gap-y-8 md:gap-x-8">
                     {steps.map((item, index) => (
-                        <div key={item.step} className={`flex flex-col items-center ${index === 0 ? 'mt-[-150px]' : index === 1 ? 'mt-[-100px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
+                        <div key={item.step} className={`flex flex-col items-center md:${index === 0 ? 'mt-[-150px]' : index === 1 ? 'mt-[-100px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
                             <div className={`relative p-6 rounded-[30px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
                                 <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-24 w-24" />
                                 <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
@@ -146,7 +148,7 @@ const HowItWorksSection = () => {
                                 <h3 className="font-bold text-xl mt-8 text-left">{item.title}</h3>
                             </div>
                             <div className="mt-4 p-4 bg-gray-700 text-white rounded-[30px] w-full text-left">
-                                <p className="text-xs">{item.explanation}</p>
+                                <p className="text-sm sm:text-base">{item.explanation}</p>
                             </div>
                         </div>
                     ))}
@@ -184,13 +186,19 @@ const TerminalSection = () => {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col md:flex-row items-center mb-12">
-        <h2 className="font-tt-travels text-4xl font-bold text-left flex-shrink-0">Торговый терминал Fixone MetaTrader 5</h2>
-        <p className="text-text-grey text-left text-lg font-semibold ml-[35px]">Все инструменты для алгоритмической и ручной торговли в одном месте — быстро, удобно и без ограничений.</p>
+        <h2 className="font-tt-travels text-3xl md:text-4xl font-bold text-center md:text-left flex-shrink-0">Торговый терминал Fixone MetaTrader 5</h2>
+        <p className="text-text-grey text-center md:text-left text-lg font-semibold mt-4 md:mt-0 md:ml-[35px]">Все инструменты для алгоритмической и ручной торговли в одном месте — быстро, удобно и без ограничений.</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+
+      {/* Image for Mobile/Tablet */}
+      <div className="flex items-center justify-center h-full mb-8 lg:hidden">
+          <img src={`${process.env.PUBLIC_URL}/device 1.svg`} alt="Fixone MetaTrader 5 on multiple devices" className="w-full max-w-lg h-auto"/>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         {/* Left Column */}
         <div>
-          <ul className="space-y-4 mb-8 columns-2">
+          <ul className="space-y-4 mb-8 columns-1 md:columns-2">
             {features.map((feature, index) => (
               <li key={index} className="flex items-center mb-2">
                 <ICONS.check className="w-5 h-5 text-[#25DE85] mr-3 flex-shrink-0" />
@@ -200,27 +208,27 @@ const TerminalSection = () => {
           </ul>
           <div className="p-6 rounded-lg mt-12 text-white" style={{backgroundImage: 'linear-gradient(to bottom, #E28AA4, #ABBCC7)'}}>
             <h3 className="font-bold text-xl mb-4 text-black">Скачайте приложение</h3>
-            <div className="flex justify-between">
+            <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 place-items-center">
               {downloadButtons.map(btn => (
                   <a 
                     href={btn.href} 
                     key={btn.label} 
-                    className="flex flex-col items-center text-gray-800 hover:text-black transition-transform duration-200 hover:scale-110 active:scale-100"
+                    className="flex flex-col items-center text-center text-gray-800 hover:text-black transition-transform duration-200 hover:scale-110 active:scale-100"
                     target={!btn.download ? "_blank" : "_self"}
                     rel={!btn.download ? "noopener noreferrer" : ""}
                     download={btn.download}
                   >
-                    <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center overflow-hidden">
-                       <img src={`${process.env.PUBLIC_URL}/${btn.imageSrc}`} alt={btn.label} className="w-8 h-8 filter grayscale brightness-50" />
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center overflow-hidden">
+                       <img src={`${process.env.PUBLIC_URL}/${btn.imageSrc}`} alt={btn.label} className="w-7 h-7 sm:w-8 sm:h-8 filter grayscale brightness-50" />
                     </div>
-                    <span className="text-sm mt-2 font-bold">{btn.label}</span>
+                    <span className="text-xs sm:text-sm mt-2 font-bold">{btn.label}</span>
                   </a>
               ))}
             </div>
           </div>
         </div>
-        {/* Right Column */}
-        <div className="flex items-center justify-center h-full">
+        {/* Right Column (Desktop Image) */}
+        <div className="hidden lg:flex items-center justify-center h-full">
           <img src={`${process.env.PUBLIC_URL}/device 1.svg`} alt="Fixone MetaTrader 5 on multiple devices" className="w-full h-auto"/>
         </div>
       </div>
@@ -265,9 +273,9 @@ const AdvantagesSection = () => {
   const nonHighlightedCards = ['Алгоритмы и автоторговля 24/7', 'MT5-терминал', 'API и интеграции'];
 
   return (
-    <div className="container mx-auto px-16">
-      <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">Наши преимущества</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="container mx-auto px-4 sm:px-16">
+      <h2 className="font-tt-travels text-3xl md:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {advantages.map((advantage, index) => {
           const isHighlighted = !nonHighlightedCards.includes(advantage.title);
           return (
@@ -316,10 +324,10 @@ const SecuritySection = () => {
   ];
 
   return (
-    <div className="container mx-auto px-16">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+    <div className="container mx-auto px-4 sm:px-16">
+      <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left mb-12">
         <div>
-          <h2 className="font-tt-travels text-4xl font-bold">Безопасность и доверие</h2>
+          <h2 className="font-tt-travels text-3xl md:text-4xl font-bold">Безопасность и доверие</h2>
           <p className="text-lg text-text-grey mt-4 max-w-3xl">Ваши средства и данные защищены на всех уровнях: от входа до хранения и транзакций</p>
         </div>
         <div className="mt-8 md:mt-0 p-4 rounded-[50px] text-white font-bold bg-gradient-to-r from-[#ABBCC7] via-[#BBC7CD] via-[#9797B1] via-[#E19C96] to-[#E28AA4]">
@@ -384,7 +392,7 @@ const LandingPage = () => {
       { id: 'security', title: 'Безопасность и соответствие', component: <SecuritySection /> },
       { id: 'about', title: 'О нас' },
       { id: 'faq', title: 'FAQ', component: <FaqSection /> },
-      { id: 'start-bot', title: 'Запустите первого бота сегодня' },
+      { id: 'start-bot', title: 'Запустите первого бота сегодня', component: <StartBotSection /> },
   ];
 
   const navLinks = [
@@ -399,10 +407,10 @@ const LandingPage = () => {
     <div className="bg-white font-open-sans text-text-black">
       {/* Header */}
       <header className="sticky top-0 bg-white shadow-md z-20">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-4" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-10 w-10"/>
-            <span className="font-tt-travels text-2xl font-bold">FIXONE ALGO</span>
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+          <Link to="/" className="flex items-center gap-2 sm:gap-4" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-8 w-8 sm:h-10 sm:w-10"/>
+            <span className="font-tt-travels text-xl sm:text-2xl font-bold">FIXONE ALGO</span>
           </Link>
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map(link => (
@@ -440,12 +448,12 @@ const LandingPage = () => {
 
       {/* Hero Section */}
         <section id="hero" className="bg-bg-light" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundImage.svg)`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-            <div className="container mx-auto px-6 py-24 flex items-center justify-center">
+            <div className="container mx-auto px-4 sm:px-6 py-16 md:py-24 flex items-center justify-center">
                 {/* Centered & Left-Aligned Content */}
                 <div className="max-w-7xl text-center">
-                    <h1 className="font-tt-travels text-5xl font-bold mb-6">Создавай. Запускай. Зарабатывай.</h1>
-                    <p className="text-xl text-text-grey max-w-6xl mx-auto mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
-                    <p className="text-xl text-text-grey max-w-6xl mx-auto mb-10">Своя биржа, терминал на базе MetaTrader 5, низкие комиссии и готовые алго-боты — от долгосрока до скальпинга.</p>
+                    <h1 className="font-tt-travels text-4xl sm:text-5xl font-bold mb-6">Создавай. Запускай. Зарабатывай.</h1>
+                    <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
+                    <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-10">Своя биржа, терминал на базе MetaTrader 5, низкие комиссии и готовые алго-боты — от долгосрока до скальпинга.</p>
                     <Link to="/auth"><Button variant="big-with-arrow">Присоединиться</Button></Link>
                 </div>
             </div>
@@ -453,23 +461,24 @@ const LandingPage = () => {
       
       {/* Sections */} 
       {sections.map((section, index) => (
-        <section key={section.id} id={section.id} className={`py-20 ${section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? 'px-16' : 'px-[10px]'} ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
+        <section key={section.id} id={section.id} className={`py-20 ${section.id === 'start-bot' ? 'px-0' : (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? 'px-16' : 'px-4 sm:px-10')} ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
+          <AnimatedSection>
             {section.id === 'about' ? (
                 <div className="max-w-7xl mx-auto px-4">
-                    <h2 className="text-4xl font-bold text-left mb-4">О нас</h2>
-                    <p className="text-lg text-gray-700 mb-4">
+                    <h2 className="text-3xl md:text-4xl font-bold text-left mb-4">О нас</h2>
+                    <p className="text-base md:text-lg text-gray-700 mb-4">
                         Мы создаём комфортную среду для алготрейдинга и автоматических стратегий. Компания Fixone Global Trading основана для того, чтобы каждый трейдер и инвестор мог зарабатывать на международных рынках без препятствий и лишних барьеров. Опираясь на опыт работы с 2019 года и десятки успешно реализованных стратегий, мы сделали ставку на автоматизацию и алго-ботов, которые позволяют стабильно работать в любых рыночных условиях.
                     </p>
-                    <p className="text-lg text-gray-700 mb-4">
+                    <p className="text-base md:text-lg text-gray-700 mb-4">
                         Наши решения подходят для скальперов, арбитражёров, криптотрейдеров, алготрейдеров, управляющих и частных инвесторов. В торговом терминале Fixone MetaTrader 5 доступны все стратегии — от классических тактик до продвинутых алгоритмических моделей, полностью готовых к интеграции с ботами.
                     </p>
-                    <p className="text-xl font-bold text-gray-700 mb-12">
+                    <p className="text-lg md:text-xl font-bold text-gray-700 mb-12">
                         Fixone — это надёжная экосистема, где идеи превращаются в алгоритмы, а алгоритмы — в прибыль.
                     </p>
 
                     <div className="flex flex-col lg:flex-row gap-12">
                         {/* Left Block - Igor Botnari Photo */}
-                        <div className="relative w-full lg:w-1/2 rounded-lg overflow-hidden shadow-lg">
+                        <div className="relative w-full lg:w-1/2 rounded-lg overflow-hidden shadow-lg h-96 lg:h-auto">
                             <img
                                 src={`${process.env.PUBLIC_URL}/igor.cbc61e98.webp`}
                                 alt="Игорь Ботнари"
@@ -542,7 +551,7 @@ const LandingPage = () => {
                 </div>
             ) : (
                 section.component ?
-                    (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' || section.id === 'builder' ? section.component : <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div>) :
+                    (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' || section.id === 'builder' || section.id === 'start-bot' ? section.component : <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div>) :
                     (
                         <div className="container mx-auto">
                             <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>
@@ -550,25 +559,26 @@ const LandingPage = () => {
                         </div>
                     )
             )}
+          </AnimatedSection>
         </section>
       ))}
 
       {/* Footer */}
-      <footer className="bg-white py-8 px-6 text-text-grey">
-        <div className="container mx-auto px-[25px]">
+      <footer className="bg-white py-8 px-4 sm:px-6 text-text-grey">
+        <div className="container mx-auto px-4 sm:px-[25px]">
             <hr className="border-gray-300" />
-            <div className="flex justify-center items-center gap-6 my-6">
-                <a href="https://x.com/FixoneExchange" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black"><ICONS.twitter /></a>
-                <a href="https://www.instagram.com/fixoneglobal/?igshid=MWZjMTM2ODFkZg%3D%3D" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+            <div className="flex justify-center items-center gap-4 sm:gap-6 my-6">
+                <a href="https://x.com/FixoneExchange" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-[35px] sm:h-[35px] text-gray-500 hover:text-black"><ICONS.twitter /></a>
+                <a href="https://www.instagram.com/fixoneglobal/?igshid=MWZjMTM2ODFkZg%3D%3D" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-[35px] sm:h-[35px] text-gray-500 hover:text-black">
                     <img src={`${process.env.PUBLIC_URL}/inst.svg`} alt="Instagram" className="w-full h-full" />
                 </a>
-                <a href="https://t.me/fixone_exchange" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                <a href="https://t.me/fixone_exchange" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-[35px] sm:h-[35px] text-gray-500 hover:text-black">
                     <img src={`${process.env.PUBLIC_URL}/teleg.svg`} alt="Telegram" className="w-full h-full" />
                 </a>
-                <a href="https://www.facebook.com/people/Fixone-Global-Exchange/100090337835479/" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                <a href="https://www.facebook.com/people/Fixone-Global-Exchange/100090337835479/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-[35px] sm:h-[35px] text-gray-500 hover:text-black">
                     <img src={`${process.env.PUBLIC_URL}/face.svg`} alt="Facebook" className="w-full h-full" />
                 </a>
-                <a href="https://www.youtube.com/@FIXONEGlobalTrading" target="_blank" rel="noopener noreferrer" className="w-[35px] h-[35px] text-gray-500 hover:text-black">
+                <a href="https://www.youtube.com/@FIXONEGlobalTrading" target="_blank" rel="noopener noreferrer" className="w-8 h-8 sm:w-[35px] sm:h-[35px] text-gray-500 hover:text-black">
                     <img src={`${process.env.PUBLIC_URL}/ytub.svg`} alt="YouTube" className="w-full h-full" />
                 </a>
             </div>

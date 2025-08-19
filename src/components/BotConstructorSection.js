@@ -142,19 +142,19 @@ const BotConstructorSection = () => {
   return (
     <div className="w-full bg-gray-50 py-20">
         <div className="container mx-auto text-center mb-12 px-4">
-            <h2 className="text-4xl font-bold">Вы можете попробовать создать бота прямо сейчас</h2>
-            <p className="text-lg text-gray-600 mt-2">Попробуйте собрать своего торгового бота в пару кликов — бесплатно и без регистрации</p>
+            <h2 className="text-3xl md:text-4xl font-bold">Вы можете попробовать создать бота прямо сейчас</h2>
+            <p className="text-base md:text-lg text-gray-600 mt-2">Попробуйте собрать своего торгового бота в пару кликов — бесплатно и без регистрации</p>
         </div>
-        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 items-stretch">
             {/* Left Container */}
-            <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col">
                 <h3 className="font-bold text-xl mb-4">Мои боты</h3>
                 <div className="relative mb-4">
                     <input type="text" placeholder="Поиск..." className="w-full pl-10 pr-4 py-2 border rounded-md"/>
                     <ICONS.search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
                 
-                <div className="flex items-center gap-2 mb-4">
+                <div className="flex flex-col md:flex-row items-center gap-2 mb-4">
                     <Dropdown title="Алгоритм" header="Алгоритмы" options={algorithmOptions} onClear={() => {}} />
                     <Dropdown title="Статус" header="Статус" options={statusOptions} multiSelect onClear={() => {}} />
                     <Dropdown title="Последнее обновление" header="Сортировка" options={sortOptions} onClear={() => {}} />
@@ -194,12 +194,12 @@ const BotConstructorSection = () => {
             </div>
 
             {/* Right Container */}
-            <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col">
+            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col">
                 <div className="flex items-center gap-4 mb-4">
                     <img src={`${process.env.PUBLIC_URL}/person.svg`} alt="User" className="w-12 h-12" />
                     <div>
                         <p className="font-semibold">test@gmail.com</p>
-                        <p className="font-bold text-2xl">$1737.61</p>
+                        <p className="font-bold text-xl md:text-2xl">$1737.61</p>
                     </div>
                 </div>
                 
@@ -208,22 +208,22 @@ const BotConstructorSection = () => {
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
                         <img src={`${process.env.PUBLIC_URL}/Polygon 4.svg`} alt="In trade" className="w-6 h-6" />
-                        <span className="font-semibold">В сделке</span>
+                        <span className="font-semibold text-sm">В сделке</span>
                         <span className="ml-auto font-bold">0</span>
                     </div>
                     <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
                         <img src={`${process.env.PUBLIC_URL}/close.svg`} alt="Error" className="w-6 h-6" />
-                        <span className="font-semibold">Ошибка</span>
+                        <span className="font-semibold text-sm">Ошибка</span>
                          <span className="ml-auto font-bold">0</span>
                     </div>
                     <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
                         <img src={`${process.env.PUBLIC_URL}/rocket.svg`} alt="Running" className="w-6 h-6" />
-                        <span className="font-semibold">Запущен</span>
+                        <span className="font-semibold text-sm">Запущен</span>
                          <span className="ml-auto font-bold">0</span>
                     </div>
                     <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
                         <img src={`${process.env.PUBLIC_URL}/stop.svg`} alt="Stopped" className="w-6 h-6" />
-                        <span className="font-semibold">Остановлен</span>
+                        <span className="font-semibold text-sm">Остановлен</span>
                          <span className="ml-auto font-bold">0</span>
                     </div>
                 </div>
@@ -265,7 +265,7 @@ const BotConstructorSection = () => {
 
                 <hr className="my-4" />
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     {marketPrices.map(item => (
                         <div key={item.name} className="text-left">
                             <p className="font-bold text-sm">{item.name}</p>

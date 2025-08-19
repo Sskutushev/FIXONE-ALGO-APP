@@ -101,12 +101,12 @@ const FilterRow = ({ number, onRemove }) => {
     const typeOptions = ['На закрытии бара', 'Раз в минуту'];
 
     return (
-        <div className="flex items-center gap-2 p-2 border rounded-md">
-            <span className="font-bold text-sm w-4 text-center">{number}</span>
-            <div className="flex-grow w-1/3"><DropdownControl label="Индикатор" options={indicatorOptions} /></div>
-            <div className="flex-grow w-1/4"><DropdownControl label="Интервал" options={intervalOptions} /></div>
-            <div className="flex-grow w-1/3"><DropdownControl label="Тип" options={typeOptions} /></div>
-            <button onClick={onRemove} className="text-gray-400 hover:text-red-500"><ICONS.close className="w-5 h-5" /></button>
+        <div className="flex flex-col sm:flex-row items-center gap-2 p-2 border rounded-md">
+            <span className="font-bold text-sm w-4 text-center mb-2 sm:mb-0">{number}</span>
+            <div className="w-full sm:flex-grow sm:w-1/3"><DropdownControl label="Индикатор" options={indicatorOptions} /></div>
+            <div className="w-full sm:flex-grow sm:w-1/4"><DropdownControl label="Интервал" options={intervalOptions} /></div>
+            <div className="w-full sm:flex-grow sm:w-1/3"><DropdownControl label="Тип" options={typeOptions} /></div>
+            <button onClick={onRemove} className="text-gray-400 hover:text-red-500 ml-auto sm:ml-0"><ICONS.close className="w-5 h-5" /></button>
         </div>
     );
 };
@@ -176,14 +176,14 @@ const CreateBotPage = () => {
             </header>
 
             {/* Main Content */}
-            <main className="container mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <main className="container mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Left Column - Chart */}
-                <div className="bg-white rounded-lg shadow-md p-1 flex flex-col h-[calc(100vh-120px)]">
+                <div className="bg-white rounded-lg shadow-md p-1 flex flex-col h-96 lg:h-[calc(100vh-120px)]">
                     <TradingViewWidget symbol={selectedPair} />
                 </div>
 
                 {/* Right Column - Form */}
-                <div className="bg-white rounded-lg shadow-md p-6 h-[calc(100vh-120px)] overflow-y-auto">
+                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 h-auto lg:h-[calc(100vh-120px)] lg:overflow-y-auto">
                     <ProgressBar />
 
                     <div className="space-y-6">
@@ -212,12 +212,12 @@ const CreateBotPage = () => {
                         {/* Step 3: Deposit */}
                         <div>
                             <label className="font-bold">Депозит</label>
-                            <div className="flex items-end gap-4 mt-1">
-                                <div className="flex-1">
+                            <div className="flex flex-col sm:flex-row items-end gap-4 mt-1">
+                                <div className="flex-1 w-full">
                                     <input type="number" placeholder="1000" className="w-full p-2 border rounded-md" />
                                     <p className="text-xs text-gray-500">Депозит</p>
                                 </div>
-                                <div className="flex-1">
+                                <div className="flex-1 w-full">
                                     <p className="p-2 border-b">$1737.61</p>
                                     <p className="text-xs text-gray-500">Баланс на счёте</p>
                                 </div>
@@ -239,7 +239,7 @@ const CreateBotPage = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-3 gap-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     {tradingModes.map(mode => (
                                         <div 
                                             key={mode.name} 
@@ -254,7 +254,7 @@ const CreateBotPage = () => {
                                 </div>
                             </div>
 
-                            <div className="flex gap-2 pt-4">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-4">
                                 <DropdownControl label="Перекрытие" options={['0.5', '0.75', '1', '1.25']} />
                                 <DropdownControl label="Сетка ордеров" options={['2', '3', '4', '5']} />
                                 <DropdownControl label="Мартингейл" options={['1%', '5%', '10%']} />

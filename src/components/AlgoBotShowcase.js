@@ -45,11 +45,11 @@ const ShowcaseBotCard = ({ title, description, imageSrc, onOpenModal, botData })
 const AlgoBotShowcase = ({ botsData, onOpenModal }) => {
     return (
         <>
-            <p className="text-text-grey text-sm mb-4 px-[75px] text-left">
+            <p className="text-text-grey text-sm mb-4 px-4 sm:px-8 md:px-[75px] text-left">
                 4 универсальных алгоритмических бота покрывают все типы стратегий — от долгосрочных инвестиций до высокочастотного скальпинга. Каждый бот уже оптимизирован под конкретные рынки, таймфреймы и риск-профиль, чтобы вы могли быстро стартовать и протестировать стратегию без сложной настройки.
             </p>
 
-            <div className="grid grid-cols-4 gap-x-[15px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-[15px]">
                 {botsData.map(bot => (
                     <ShowcaseBotCard
                         key={bot.title}
@@ -63,8 +63,8 @@ const AlgoBotShowcase = ({ botsData, onOpenModal }) => {
             </div>
 
             <div className="flex items-center justify-center mt-12 p-4 rounded-[50px] max-w-4xl mx-auto text-white bg-gradient-to-r from-[#ABBCC7] to-[#E28AA4]">
-                <img src={`${process.env.PUBLIC_URL}/warning 1.svg`} alt="Warning" className="w-[50px] h-[50px] mr-4" />
-                <p className="text-xs">
+                <img src={`${process.env.PUBLIC_URL}/warning 1.svg`} alt="Warning" className="w-8 h-8 sm:w-[50px] sm:h-[50px] mr-4 flex-shrink-0" />
+                <p className="text-xs sm:text-sm">
                     Алготрейдинг — это инструмент с потенциальной доходностью, но и с рисками. Данный материал не является инвестсоветом.
                 </p>
             </div>

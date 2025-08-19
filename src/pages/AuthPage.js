@@ -14,13 +14,13 @@ const Button = ({ children, variant = 'big-classic', className = '', ...props })
 
 const AuthPage = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 font-open-sans">
-            <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-4">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 font-open-sans p-4">
+            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-md w-full max-w-md">
                 <Link to="/" className="flex items-center gap-4 mb-8 justify-center">
-                    <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-12 w-12"/>
-                    <span className="font-tt-travels text-3xl font-bold">FIXONE ALGO</span>
+                    <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-10 w-10 sm:h-12 sm:w-12"/>
+                    <span className="font-tt-travels text-2xl sm:text-3xl font-bold">FIXONE ALGO</span>
                 </Link>
-                <h2 className="text-2xl font-bold mb-6 text-center">Вход или Регистрация</h2>
+                <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center">Вход или Регистрация</h2>
                 <form>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
