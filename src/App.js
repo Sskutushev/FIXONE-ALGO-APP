@@ -4,7 +4,9 @@ import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AlgoBotShowcase from './components/AlgoBotShowcase';
 import BotDetailModal from './components/BotDetailModal';
 import AuthPage from './pages/AuthPage';
+import CreateBotPage from './pages/CreateBotPage';
 import FaqSection from './components/FaqSection';
+import BotConstructorSection from './components/BotConstructorSection';
 
 //=========== ICONS (SVG) ===========//
 const ICONS = {
@@ -376,7 +378,7 @@ const LandingPage = () => {
       { id: 'partners', title: 'Наши партнёры', component: <PartnersCarousel /> },
       { id: 'how-it-works', title: 'Как это работает?', component: <HowItWorksSection /> },
       { id: 'showcase', title: 'Витрина алго-ботов', component: <AlgoBotShowcase botsData={strategyCards} onOpenModal={handleOpenModal} /> },
-      { id: 'builder', title: 'Конструктор ботов' },
+      { id: 'builder', title: 'Конструктор ботов', component: <BotConstructorSection /> },
       { id: 'terminal', title: 'Все рынки-один терминал', component: <TerminalSection /> },
       { id: 'advantages', title: 'Наши преимущества', component: <AdvantagesSection /> },
       { id: 'security', title: 'Безопасность и соответствие', component: <SecuritySection /> },
@@ -398,7 +400,7 @@ const LandingPage = () => {
       {/* Header */}
       <header className="sticky top-0 bg-white shadow-md z-20">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-4">
+          <Link to="/" className="flex items-center gap-4" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-10 w-10"/>
             <span className="font-tt-travels text-2xl font-bold">FIXONE ALGO</span>
           </Link>
@@ -418,7 +420,7 @@ const LandingPage = () => {
         {/* Mobile Menu */}
         <div className={`fixed inset-0 z-50 bg-white p-6 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
             <div className="flex justify-between items-center mb-8">
-                <Link to="/" className="flex items-center gap-4" onClick={() => setMobileMenuOpen(false)}>
+                <Link to="/" className="flex items-center gap-4" onClick={() => { setMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
                     <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-10 w-10"/>
                     <span className="font-tt-travels text-2xl font-bold">FIXONE ALGO</span>
                 </Link>
@@ -540,7 +542,7 @@ const LandingPage = () => {
                 </div>
             ) : (
                 section.component ?
-                    (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? section.component : <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div>) :
+                    (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' || section.id === 'builder' ? section.component : <div className="container mx-auto"><h2 className="font-tt-travels text-4xl font-bold text-center mb-4">{section.title}</h2>{section.component}</div>) :
                     (
                         <div className="container mx-auto">
                             <h2 className="font-tt-travels text-4xl font-bold text-center mb-12">{section.title}</h2>
@@ -608,6 +610,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/create-bot" element={<CreateBotPage />} />
       </Routes>
     </Router>
   );
