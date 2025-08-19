@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Animated from './Animated'; // Import Animated component
 
 // Mock data for algo bots
 
@@ -45,29 +46,34 @@ const ShowcaseBotCard = ({ title, description, imageSrc, onOpenModal, botData })
 const AlgoBotShowcase = ({ botsData, onOpenModal }) => {
     return (
         <>
-            <p className="text-text-grey text-sm mb-4 px-4 sm:px-8 md:px-[75px] text-left">
-                4 универсальных алгоритмических бота покрывают все типы стратегий — от долгосрочных инвестиций до высокочастотного скальпинга. Каждый бот уже оптимизирован под конкретные рынки, таймфреймы и риск-профиль, чтобы вы могли быстро стартовать и протестировать стратегию без сложной настройки.
-            </p>
+            <Animated>
+                <p className="text-text-grey text-sm mb-4 px-4 sm:px-8 md:px-[75px] text-left">
+                    4 универсальных алгоритмических бота покрывают все типы стратегий — от долгосрочных инвестиций до высокочастотного скальпинга. Каждый бот уже оптимизирован под конкретные рынки, таймфреймы и риск-профиль, чтобы вы могли быстро стартовать и протестировать стратегию без сложной настройки.
+                </p>
+            </Animated>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-x-[15px]">
-                {botsData.map(bot => (
-                    <ShowcaseBotCard
-                        key={bot.title}
-                        title={bot.title}
-                        description={bot.description}
-                        imageSrc={bot.imageSrc}
-                        onOpenModal={onOpenModal}
-                        botData={bot}
-                    />
+                {botsData.map((bot, index) => (
+                    <Animated key={bot.title} delay={index * 150}>
+                        <ShowcaseBotCard
+                            title={bot.title}
+                            description={bot.description}
+                            imageSrc={bot.imageSrc}
+                            onOpenModal={onOpenModal}
+                            botData={bot}
+                        />
+                    </Animated>
                 ))}
             </div>
 
-            <div className="flex items-center justify-center mt-12 p-4 rounded-[50px] max-w-4xl mx-auto text-white bg-gradient-to-r from-[#ABBCC7] to-[#E28AA4]">
-                <img src={`${process.env.PUBLIC_URL}/warning 1.svg`} alt="Warning" className="w-8 h-8 sm:w-[50px] sm:h-[50px] mr-4 flex-shrink-0" />
-                <p className="text-xs sm:text-sm">
-                    Алготрейдинг — это инструмент с потенциальной доходностью, но и с рисками. Данный материал не является инвестсоветом.
-                </p>
-            </div>
+            <Animated delay={300}>
+                <div className="flex items-center justify-center mt-12 p-4 rounded-[50px] max-w-4xl mx-auto text-white bg-gradient-to-r from-[#ABBCC7] to-[#E28AA4]">
+                    <img src={`${process.env.PUBLIC_URL}/warning 1.svg`} alt="Warning" className="w-8 h-8 sm:w-[50px] sm:h-[50px] mr-4 flex-shrink-0" />
+                    <p className="text-xs sm:text-sm">
+                        Алготрейдинг — это инструмент с потенциальной доходностью, но и с рисками. Данный материал не является инвестсоветом.
+                    </p>
+                </div>
+            </Animated>
         </>
     );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Animated from './Animated';
 
 // ICONS PLACEHOLDER - Re-using from CreateBotPage for consistency
 const ICONS = {
@@ -141,140 +142,146 @@ const BotConstructorSection = () => {
 
   return (
     <div className="w-full bg-gray-50 py-20">
-        <div className="container mx-auto text-center mb-12 px-4">
-            <h2 className="text-3xl md:text-4xl font-bold">Вы можете попробовать создать бота прямо сейчас</h2>
-            <p className="text-base md:text-lg text-gray-600 mt-2">Попробуйте собрать своего торгового бота в пару кликов — бесплатно и без регистрации</p>
-        </div>
+        <Animated>
+            <div className="container mx-auto text-center mb-12 px-4">
+                <h2 className="text-3xl md:text-4xl font-bold">Вы можете попробовать создать бота прямо сейчас</h2>
+                <p className="text-base md:text-lg text-gray-600 mt-2">Попробуйте собрать своего торгового бота в пару кликов — бесплатно и без регистрации</p>
+            </div>
+        </Animated>
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 px-4 items-stretch">
             {/* Left Container */}
-            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col">
-                <h3 className="font-bold text-xl mb-4">Мои боты</h3>
-                <div className="relative mb-4">
-                    <input type="text" placeholder="Поиск..." className="w-full pl-10 pr-4 py-2 border rounded-md"/>
-                    <ICONS.search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                </div>
-                
-                <div className="flex flex-col md:flex-row items-center gap-2 mb-4">
-                    <Dropdown title="Алгоритм" header="Алгоритмы" options={algorithmOptions} onClear={() => {}} />
-                    <Dropdown title="Статус" header="Статус" options={statusOptions} multiSelect onClear={() => {}} />
-                    <Dropdown title="Последнее обновление" header="Сортировка" options={sortOptions} onClear={() => {}} />
-                </div>
+            <Animated animation="fadeInLeft">
+                <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col h-full">
+                    <h3 className="font-bold text-xl mb-4">Мои боты</h3>
+                    <div className="relative mb-4">
+                        <input type="text" placeholder="Поиск..." className="w-full pl-10 pr-4 py-2 border rounded-md"/>
+                        <ICONS.search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    </div>
+                    
+                    <div className="flex flex-col md:flex-row items-center gap-2 mb-4">
+                        <Dropdown title="Алгоритм" header="Алгоритмы" options={algorithmOptions} onClear={() => {}} />
+                        <Dropdown title="Статус" header="Статус" options={statusOptions} multiSelect onClear={() => {}} />
+                        <Dropdown title="Последнее обновление" header="Сортировка" options={sortOptions} onClear={() => {}} />
+                    </div>
 
-                <hr className="my-4" />
+                    <hr className="my-4" />
 
-                <div className="flex items-center gap-4 mb-4">
-                    <button className="p-2 text-gray-500 hover:text-red-500">
-                        <ICONS.trash className="w-6 h-6" />
+                    <div className="flex items-center gap-4 mb-4">
+                        <button className="p-2 text-gray-500 hover:text-red-500">
+                            <ICONS.trash className="w-6 h-6" />
+                        </button>
+                        <div className="flex flex-wrap gap-2 items-center">
+                            <div className="w-px h-6 bg-gray-300 mx-2"></div> {/* Separator */}
+                            {selectedFilters.map(filter => (
+                                <div key={filter} className="bg-[#C2C2C2] text-black text-sm px-3 py-1 rounded-full flex items-center gap-2">
+                                    <span>{filter}</span>
+                                    <button><ICONS.close className="w-3 h-3" /></button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <button className="w-full bg-[#E3E3E3] border border-[#868686] text-black font-bold py-2 rounded-md mb-4 hover:bg-gray-300 active:bg-gray-400 transition-colors">
+                        Обновить
                     </button>
-                    <div className="flex flex-wrap gap-2 items-center">
-                        <div className="w-px h-6 bg-gray-300 mx-2"></div> {/* Separator */}
-                        {selectedFilters.map(filter => (
-                            <div key={filter} className="bg-[#C2C2C2] text-black text-sm px-3 py-1 rounded-full flex items-center gap-2">
-                                <span>{filter}</span>
-                                <button><ICONS.close className="w-3 h-3" /></button>
+
+                    <div className="border rounded-lg p-4 flex-grow">
+                        <div className="flex">
+                            <div className="pr-4 font-bold text-gray-500">
+                                {Array.from({ length: 10 }).map((_, i) => <div key={i} className="h-8 flex items-center">{i + 1}</div>)}
+                            </div>
+                            <div className="border-l border-gray-300 pl-4 flex-1">
+                                {Array.from({ length: 10 }).map((_, i) => <div key={i} className="h-8 border-b flex items-center text-sm">Bot Name {i+1} - Running</div>)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Animated>
+
+            {/* Right Container */}
+            <Animated animation="fadeInRight">
+                <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col h-full">
+                    <div className="flex items-center gap-4 mb-4">
+                        <img src={`${process.env.PUBLIC_URL}/person.svg`} alt="User" className="w-12 h-12" />
+                        <div>
+                            <p className="font-semibold">test@gmail.com</p>
+                            <p className="font-bold text-xl md:text-2xl">$1737.61</p>
+                        </div>
+                    </div>
+                    
+                    <hr className="my-4" />
+
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                        <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
+                            <img src={`${process.env.PUBLIC_URL}/Polygon 4.svg`} alt="In trade" className="w-6 h-6" />
+                            <span className="font-semibold text-sm">В сделке</span>
+                            <span className="ml-auto font-bold">0</span>
+                        </div>
+                        <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
+                            <img src={`${process.env.PUBLIC_URL}/close.svg`} alt="Error" className="w-6 h-6" />
+                            <span className="font-semibold text-sm">Ошибка</span>
+                            <span className="ml-auto font-bold">0</span>
+                        </div>
+                        <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
+                            <img src={`${process.env.PUBLIC_URL}/rocket.svg`} alt="Running" className="w-6 h-6" />
+                            <span className="font-semibold text-sm">Запущен</span>
+                            <span className="ml-auto font-bold">0</span>
+                        </div>
+                        <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
+                            <img src={`${process.env.PUBLIC_URL}/stop.svg`} alt="Stopped" className="w-6 h-6" />
+                            <span className="font-semibold text-sm">Остановлен</span>
+                            <span className="ml-auto font-bold">0</span>
+                        </div>
+                    </div>
+
+                    <Link to="/create-bot" className="w-full">
+                        <button className="w-full bg-[#FF7255] text-white font-bold py-3 rounded-[90px] text-lg mb-4 hover:bg-orange-600 active:bg-orange-700 transition-colors">
+                            Создать бота
+                        </button>
+                    </Link>
+
+                    <div className="relative mb-4">
+                        <button className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 flex justify-between items-center text-sm">
+                            <span>18.07.2025–18.08.2025</span>
+                            <ICONS.chevronDown className="w-5 h-5" />
+                        </button>
+                    </div>
+
+                    <div className="border rounded-lg p-4 mb-4 text-xs flex-grow overflow-y-auto h-48">
+                        <h4 className="font-bold mb-2 text-sm">Сделок завершено</h4>
+                        <table className="w-full table-auto">
+                            <thead>
+                                <tr className="text-left text-gray-500">
+                                    <th className="py-1">Пара</th>
+                                    <th className="py-1">Алгоритм</th>
+                                    <th className="py-1">Результат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {completedTrades.map(trade => (
+                                <tr key={trade.id} className="border-b">
+                                    <td className="py-1">{trade.pair}</td>
+                                    <td className={`py-1 ${trade.algo === 'Long' ? 'text-green-500' : 'text-red-500'}`}>{trade.algo}</td>
+                                    <td className={`py-1 ${trade.result > 0 ? 'text-green-500' : 'text-red-500'}`}>{trade.result > 0 ? '+' : ''}${trade.result}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr className="my-4" />
+
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {marketPrices.map(item => (
+                            <div key={item.name} className="text-left">
+                                <p className="font-bold text-sm">{item.name}</p>
+                                <p className="text-xs">{item.price}</p>
+                                <p className={`text-xs ${item.positive ? 'text-green-500' : 'text-red-500'}`}>{item.change}</p>
                             </div>
                         ))}
                     </div>
                 </div>
-
-                <button className="w-full bg-[#E3E3E3] border border-[#868686] text-black font-bold py-2 rounded-md mb-4 hover:bg-gray-300 active:bg-gray-400 transition-colors">
-                    Обновить
-                </button>
-
-                <div className="border rounded-lg p-4 flex-grow">
-                    <div className="flex">
-                        <div className="pr-4 font-bold text-gray-500">
-                            {Array.from({ length: 10 }).map((_, i) => <div key={i} className="h-8 flex items-center">{i + 1}</div>)}
-                        </div>
-                        <div className="border-l border-gray-300 pl-4 flex-1">
-                             {Array.from({ length: 10 }).map((_, i) => <div key={i} className="h-8 border-b flex items-center text-sm">Bot Name {i+1} - Running</div>)}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Right Container */}
-            <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col">
-                <div className="flex items-center gap-4 mb-4">
-                    <img src={`${process.env.PUBLIC_URL}/person.svg`} alt="User" className="w-12 h-12" />
-                    <div>
-                        <p className="font-semibold">test@gmail.com</p>
-                        <p className="font-bold text-xl md:text-2xl">$1737.61</p>
-                    </div>
-                </div>
-                
-                <hr className="my-4" />
-
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
-                        <img src={`${process.env.PUBLIC_URL}/Polygon 4.svg`} alt="In trade" className="w-6 h-6" />
-                        <span className="font-semibold text-sm">В сделке</span>
-                        <span className="ml-auto font-bold">0</span>
-                    </div>
-                    <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
-                        <img src={`${process.env.PUBLIC_URL}/close.svg`} alt="Error" className="w-6 h-6" />
-                        <span className="font-semibold text-sm">Ошибка</span>
-                         <span className="ml-auto font-bold">0</span>
-                    </div>
-                    <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
-                        <img src={`${process.env.PUBLIC_URL}/rocket.svg`} alt="Running" className="w-6 h-6" />
-                        <span className="font-semibold text-sm">Запущен</span>
-                         <span className="ml-auto font-bold">0</span>
-                    </div>
-                    <div className="bg-gray-100 p-3 rounded-lg flex items-center gap-3">
-                        <img src={`${process.env.PUBLIC_URL}/stop.svg`} alt="Stopped" className="w-6 h-6" />
-                        <span className="font-semibold text-sm">Остановлен</span>
-                         <span className="ml-auto font-bold">0</span>
-                    </div>
-                </div>
-
-                <Link to="/create-bot" className="w-full">
-                    <button className="w-full bg-[#FF7255] text-white font-bold py-3 rounded-[90px] text-lg mb-4 hover:bg-orange-600 active:bg-orange-700 transition-colors">
-                        Создать бота
-                    </button>
-                </Link>
-
-                <div className="relative mb-4">
-                    <button className="w-full bg-gray-100 border border-gray-300 rounded-md px-4 py-2 flex justify-between items-center text-sm">
-                        <span>18.07.2025–18.08.2025</span>
-                        <ICONS.chevronDown className="w-5 h-5" />
-                    </button>
-                </div>
-
-                <div className="border rounded-lg p-4 mb-4 text-xs flex-grow overflow-y-auto h-48">
-                    <h4 className="font-bold mb-2 text-sm">Сделок завершено</h4>
-                    <table className="w-full table-auto">
-                        <thead>
-                            <tr className="text-left text-gray-500">
-                                <th className="py-1">Пара</th>
-                                <th className="py-1">Алгоритм</th>
-                                <th className="py-1">Результат</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {completedTrades.map(trade => (
-                            <tr key={trade.id} className="border-b">
-                                <td className="py-1">{trade.pair}</td>
-                                <td className={`py-1 ${trade.algo === 'Long' ? 'text-green-500' : 'text-red-500'}`}>{trade.algo}</td>
-                                <td className={`py-1 ${trade.result > 0 ? 'text-green-500' : 'text-red-500'}`}>{trade.result > 0 ? '+' : ''}${trade.result}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                <hr className="my-4" />
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                    {marketPrices.map(item => (
-                        <div key={item.name} className="text-left">
-                            <p className="font-bold text-sm">{item.name}</p>
-                            <p className="text-xs">{item.price}</p>
-                            <p className={`text-xs ${item.positive ? 'text-green-500' : 'text-red-500'}`}>{item.change}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            </Animated>
         </div>
     </div>
   );

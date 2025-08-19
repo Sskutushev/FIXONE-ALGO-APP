@@ -8,7 +8,7 @@ import CreateBotPage from './pages/CreateBotPage';
 import FaqSection from './components/FaqSection';
 import StartBotSection from './components/StartBotSection';
 import BotConstructorSection from './components/BotConstructorSection';
-import AnimatedSection from './components/AnimatedSection';
+import Animated from './components/Animated';
 
 //=========== ICONS (SVG) ===========//
 const ICONS = {
@@ -132,25 +132,28 @@ const HowItWorksSection = () => {
 
     return (
         <div className="container mx-auto px-4">
-            
-            <div className="relative md:mb-[-150px] px-8">
-                <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="w-full h-auto hidden md:block" style={{ filter: 'brightness(1.5)' }} />
-            </div>
+            <Animated>
+                <div className="relative md:mb-[-150px] px-8">
+                    <img src={`${process.env.PUBLIC_URL}/roadmap.svg`} alt="Roadmap" className="w-full h-auto hidden md:block" style={{ filter: 'brightness(1.5)' }} />
+                </div>
+            </Animated>
             <div className="relative md:mt-[100px]">
                 <div className="relative grid grid-cols-1 md:grid-cols-4 gap-y-8 md:gap-x-8">
                     {steps.map((item, index) => (
-                        <div key={item.step} className={`flex flex-col items-center md:${index === 0 ? 'mt-[-80px]' : index === 1 ? 'mt-[-130px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
-                            <div className={`relative p-6 rounded-[30px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
-                                <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-24 w-24" />
-                                <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
-                                    Шаг {item.step}
+                        <Animated key={item.step} delay={index * 200}>
+                            <div className={`flex flex-col items-center h-full md:${index === 0 ? 'mt-[-80px]' : index === 1 ? 'mt-[-130px]' : index === 2 ? 'mt-[-150px]' : index === 3 ? 'mt-[-100px]' : ''}`}>
+                                <div className={`relative p-6 rounded-[30px] w-full ${item.step === 4 ? 'bg-[#FF7255]' : 'bg-white'}`}>
+                                    <img src={`${process.env.PUBLIC_URL}/${item.step === 4 ? 'flag_green.svg' : 'flag.svg'}`} alt="Flag" className="absolute -top-10 left-4 h-24 w-24" />
+                                    <div className="absolute top-4 right-4 bg-black text-white text-sm font-bold px-3 py-1 rounded-full">
+                                        Шаг {item.step}
+                                    </div>
+                                    <h3 className="font-bold text-xl mt-8 text-left">{item.title}</h3>
                                 </div>
-                                <h3 className="font-bold text-xl mt-8 text-left">{item.title}</h3>
+                                <div className="mt-4 p-4 bg-gray-700 text-white rounded-[30px] w-full text-left flex-grow">
+                                    <p className="text-sm sm:text-base">{item.explanation}</p>
+                                </div>
                             </div>
-                            <div className="mt-4 p-4 bg-gray-700 text-white rounded-[30px] w-full text-left">
-                                <p className="text-sm sm:text-base">{item.explanation}</p>
-                            </div>
-                        </div>
+                        </Animated>
                     ))}
                 </div>
             </div>
@@ -274,24 +277,27 @@ const AdvantagesSection = () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-16">
-      <h2 className="font-tt-travels text-3xl md:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+      <Animated>
+        <h2 className="font-tt-travels text-3xl md:text-4xl font-bold text-center mb-12">Наши преимущества</h2>
+      </Animated>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {advantages.map((advantage, index) => {
           const isHighlighted = !nonHighlightedCards.includes(advantage.title);
           return (
-            <div 
-              key={index} 
-              className={`p-4 rounded-lg shadow-lg flex items-start space-x-4 ${isHighlighted ? '' : 'bg-white'}`}
-              style={isHighlighted ? { backgroundColor: '#C2C2C2' } : {}}
-            >
-              <div className="flex-shrink-0">
-                <img src={`${process.env.PUBLIC_URL}/${advantage.imageSrc}`} alt="" className="w-12 h-12" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold mb-2">{advantage.title}</h3>
-                <p className={isHighlighted ? 'text-gray-800' : 'text-text-grey'}>{advantage.description}</p>
-              </div>
-            </div>
+            <Animated key={index} delay={isHighlighted ? 300 : 0}>
+                <div 
+                  className={`p-4 rounded-lg shadow-lg flex items-start space-x-4 h-full ${isHighlighted ? '' : 'bg-white'}`}
+                  style={isHighlighted ? { backgroundColor: '#C2C2C2' } : {}}
+                >
+                  <div className="flex-shrink-0">
+                    <img src={`${process.env.PUBLIC_URL}/${advantage.imageSrc}`} alt="" className="w-12 h-12" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">{advantage.title}</h3>
+                    <p className={isHighlighted ? 'text-gray-800' : 'text-text-grey'}>{advantage.description}</p>
+                  </div>
+                </div>
+            </Animated>
           );
         })}
       </div>
@@ -325,24 +331,28 @@ const SecuritySection = () => {
 
   return (
     <div className="container mx-auto px-4 sm:px-16">
-      <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left mb-12">
-        <div>
-          <h2 className="font-tt-travels text-3xl md:text-4xl font-bold">Безопасность и доверие</h2>
-          <p className="text-lg text-text-grey mt-4 max-w-3xl">Ваши средства и данные защищены на всех уровнях: от входа до хранения и транзакций</p>
+      <Animated>
+        <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left mb-12">
+          <div>
+            <h2 className="font-tt-travels text-3xl md:text-4xl font-bold">Безопасность и доверие</h2>
+            <p className="text-lg text-text-grey mt-4 max-w-3xl">Ваши средства и данные защищены на всех уровнях: от входа до хранения и транзакций</p>
+          </div>
+          <div className="mt-8 md:mt-0 p-4 rounded-[50px] text-white font-bold bg-gradient-to-r from-[#ABBCC7] via-[#BBC7CD] via-[#9797B1] via-[#E19C96] to-[#E28AA4]">
+            Безопасность средств — приоритет №1
+          </div>
         </div>
-        <div className="mt-8 md:mt-0 p-4 rounded-[50px] text-white font-bold bg-gradient-to-r from-[#ABBCC7] via-[#BBC7CD] via-[#9797B1] via-[#E19C96] to-[#E28AA4]">
-          Безопасность средств — приоритет №1
-        </div>
-      </div>
+      </Animated>
       <div className="flex flex-col md:flex-row gap-4">
         {securityCards.map((card, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg border border-gray-300 shadow-lg flex flex-col items-start text-left h-full">
-              <div className="flex items-center mb-4">
-                <img src={`${process.env.PUBLIC_URL}/${card.imageSrc}`} alt={card.title} className="w-12 h-12 mr-4 flex-shrink-0" />
-                <h3 className="text-xl font-bold">{card.title}</h3>
-              </div>
-              <p className="text-text-grey">{card.description}</p>
-            </div>
+            <Animated key={index} delay={index * 150}>
+                <div className="bg-white p-6 rounded-lg border border-gray-300 shadow-lg flex flex-col items-start text-left h-full">
+                  <div className="flex items-center mb-4">
+                    <img src={`${process.env.PUBLIC_URL}/${card.imageSrc}`} alt={card.title} className="w-12 h-12 mr-4 flex-shrink-0" />
+                    <h3 className="text-xl font-bold">{card.title}</h3>
+                  </div>
+                  <p className="text-text-grey">{card.description}</p>
+                </div>
+            </Animated>
         ))}
       </div>
     </div>
@@ -404,7 +414,7 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="bg-white font-open-sans text-text-black">
+    <div className="bg-white font-open-sans text-text-black overflow-x-hidden">
       {/* Header */}
       <header className="sticky top-0 bg-white shadow-md z-20">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
@@ -449,7 +459,6 @@ const LandingPage = () => {
       {/* Hero Section */}
         <section id="hero" className="bg-bg-light" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundImage.svg)`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <div className="container mx-auto px-4 sm:px-6 py-16 md:py-24 flex items-center justify-center">
-                {/* Centered & Left-Aligned Content */}
                 <div className="max-w-7xl text-center">
                     <h1 className="font-tt-travels text-4xl sm:text-5xl font-bold mb-6">Создавай. Запускай. Зарабатывай.</h1>
                     <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
@@ -462,7 +471,6 @@ const LandingPage = () => {
       {/* Sections */} 
       {sections.map((section, index) => (
         <section key={section.id} id={section.id} className={`py-20 ${section.id === 'start-bot' ? 'px-0' : (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? 'px-16' : 'px-4 sm:px-10')} ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
-          <AnimatedSection>
             {section.id === 'about' ? (
                 <div className="max-w-7xl mx-auto px-4">
                     <h2 className="text-3xl md:text-4xl font-bold text-left mb-4">О нас</h2>
@@ -559,7 +567,6 @@ const LandingPage = () => {
                         </div>
                     )
             )}
-          </AnimatedSection>
         </section>
       ))}
 
