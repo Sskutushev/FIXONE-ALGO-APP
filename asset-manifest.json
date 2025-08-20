@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/FIXONE-ALGO-APP/static/css/main.25689fe7.css",
-    "main.js": "/FIXONE-ALGO-APP/static/js/main.6f265f43.js",
+    "main.css": "/FIXONE-ALGO-APP/static/css/main.b2704b8b.css",
+    "main.js": "/FIXONE-ALGO-APP/static/js/main.a932aac5.js",
     "static/js/453.ec1a3a7f.chunk.js": "/FIXONE-ALGO-APP/static/js/453.ec1a3a7f.chunk.js",
     "index.html": "/FIXONE-ALGO-APP/index.html",
-    "main.25689fe7.css.map": "/FIXONE-ALGO-APP/static/css/main.25689fe7.css.map",
-    "main.6f265f43.js.map": "/FIXONE-ALGO-APP/static/js/main.6f265f43.js.map",
+    "main.b2704b8b.css.map": "/FIXONE-ALGO-APP/static/css/main.b2704b8b.css.map",
+    "main.a932aac5.js.map": "/FIXONE-ALGO-APP/static/js/main.a932aac5.js.map",
     "453.ec1a3a7f.chunk.js.map": "/FIXONE-ALGO-APP/static/js/453.ec1a3a7f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.25689fe7.css",
-    "static/js/main.6f265f43.js"
+    "static/css/main.b2704b8b.css",
+    "static/js/main.a932aac5.js"
   ]
 }
