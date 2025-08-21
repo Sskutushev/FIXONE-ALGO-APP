@@ -49,6 +49,13 @@ module.exports = {
           '100%': { transform: 'translateX(-100%)' },
         },
       },
+      brightness: {
+        '150': '1.5',
+      },
+      backgroundImage: {
+        'terminal-gradient': 'linear-gradient(to bottom, #E28AA4, #ABBCC7)',
+        'start-bot-gradient': 'linear-gradient(to bottom, rgba(226, 138, 164, 0.7), rgba(225, 155, 151, 0.7), rgba(151, 151, 177, 0.7), rgba(187, 199, 205, 0.7), rgba(171, 188, 199, 0.7))',
+      }
     },
   },
   plugins: [],

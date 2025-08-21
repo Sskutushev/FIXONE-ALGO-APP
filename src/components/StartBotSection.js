@@ -1,21 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Animated from './Animated';
-
-const ICONS = {
-  check: (props) => (
-    <svg {...props} viewBox="0 0 20 20" fill="currentColor">
-      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-    </svg>
-  ),
-};
-
-const hexToRgba = (hex, alpha) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-};
+import { ICONS } from './ui/Icons';
 
 const StartBotSection = () => {
 
@@ -27,28 +13,17 @@ const StartBotSection = () => {
     }
   };
 
-  const gradientColors = [
-      '#E28AA4',
-      '#E19B97',
-      '#9797B1',
-      '#BBC7CD',
-      '#ABBCC7'
-  ];
-
-  const gradientString = `linear-gradient(to bottom, ${gradientColors.map(color => hexToRgba(color, 0.7)).join(', ')})`;
-
   return (
     <div 
       className="w-full py-24 px-4 text-white bg-center bg-cover relative" 
       style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundImage.svg)` }}
     >
       <div 
-        className="absolute inset-0"
-        style={{backgroundImage: gradientString}}
+        className="absolute inset-0 bg-start-bot-gradient"
       ></div>
       <div className="container mx-auto text-center relative z-10">
         <Animated>
-            <h2 className="text-5xl font-bold font-tt-travels mb-4">ЗАпусти первого бота уже сегодня</h2>
+            <h2 className="text-5xl font-bold font-tt-travels mb-4">Запусти первого бота уже сегодня</h2>
             <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-8">
               От идеи до работающей стратегии — всего несколько кликов. Начни с готового шаблона или создай своего уникального бота с нуля.
             </p>
