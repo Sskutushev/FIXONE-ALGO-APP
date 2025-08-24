@@ -1,0 +1,18 @@
+import React from 'react';
+
+const PageContent = ({ title, children }) => (
+    <div className="bg-white rounded-[60px] p-6 sm:p-8 md:p-10 shadow-lg min-h-[calc(100vh-10rem)]">
+        <h1 className="text-3xl md:text-4xl font-bold mb-6">{title}</h1>
+        <div>{children}</div>
+    </div>
+);
+
+const HomePage = () => {
+  return (
+    <PageContent title="Главная">
+      <p>Добро пожаловать в ваш личный кабинет! Этот раздел будет стартовой страницей после авторизации.</p>
+    </PageContent>
+  );
+};
+
+export default HomePage;

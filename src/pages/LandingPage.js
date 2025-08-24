@@ -1,6 +1,7 @@
-// UNIQUE_TEST_COMMENT_20250817_1
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+
 import AlgoBotShowcase from '../components/AlgoBotShowcase';
 import BotDetailModal from '../components/BotDetailModal';
 import FaqSection from '../components/FaqSection';
@@ -14,6 +15,7 @@ import HowItWorksSection from '../components/landing/HowItWorksSection';
 import TerminalSection from '../components/landing/TerminalSection';
 import AdvantagesSection from '../components/landing/AdvantagesSection';
 import SecuritySection from '../components/landing/SecuritySection';
+import LanguageSwitcher from '../components/LanguageSwitcher'; // Import LanguageSwitcher
 
 //=========== MOCK DATA ===========//
 const botImages = [
@@ -25,6 +27,7 @@ const botImages = [
 
 //=========== LANDING PAGE ===========//
 const LandingPage = () => {
+  const { t } = useTranslation(); // Initialize translation hook
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBot, setSelectedBot] = useState(null);
@@ -48,32 +51,51 @@ const LandingPage = () => {
     setMobileMenuOpen(false);
   };
 
+  // Define data inside the component to use the t() function
   const strategyCards = [
-      { title: 'Долгосрок', description: 'Стратегии, ориентированные на длительное удержание позиций и глобальные тренды. Минимальное количество сделок, фокус на фундаментальном анализе.', imageSrc: botImages[0] },
-      { title: 'Среднесрок', description: 'Сбалансированный подход с удержанием позиций от нескольких дней до недель. Использует комбинацию технического и новостного анализа.', imageSrc: botImages[1] },
-      { title: 'Внутридневной', description: 'Набор сигналов на средних тайм-фреймах: 15-30-минутный. Можно торговать небольшим количеством сделок внутри дня, со средним периодом реализации.', imageSrc: botImages[2] },
-      { title: 'Скальперский', description: 'Высокочастотные стратегии для извлечения прибыли из минимальных колебаний цен. Требует быстрой реакции и минимальных задержек.', imageSrc: botImages[3] },
+      { title: t('strategy_long_term_title'), description: t('strategy_long_term_desc'), imageSrc: botImages[0] },
+      { title: t('strategy_mid_term_title'), description: t('strategy_mid_term_desc'), imageSrc: botImages[1] },
+      { title: t('strategy_intraday_title'), description: t('strategy_intraday_desc'), imageSrc: botImages[2] },
+      { title: t('strategy_scalping_title'), description: t('strategy_scalping_desc'), imageSrc: botImages[3] },
   ];
 
   const sections = [
-      { id: 'partners', title: 'Наши партнёры', component: <PartnersCarousel /> },
-      { id: 'how-it-works', title: 'Как это работает?', component: <HowItWorksSection /> },
-      { id: 'showcase', title: 'Витрина алго-ботов', component: <AlgoBotShowcase botsData={strategyCards} onOpenModal={handleOpenModal} /> },
-      { id: 'builder', title: 'Конструктор ботов', component: <BotConstructorSection /> },
-      { id: 'terminal', title: 'Все рынки-один терминал', component: <TerminalSection /> },
-      { id: 'advantages', title: 'Наши преимущества', component: <AdvantagesSection /> },
-      { id: 'security', title: 'Безопасность и соответствие', component: <SecuritySection /> },
-      { id: 'about', title: 'О нас' },
-      { id: 'faq', title: 'FAQ', component: <FaqSection /> },
-      { id: 'start-bot', title: 'Запустите первого бота сегодня', component: <StartBotSection /> },
+      { id: 'partners', title: t('partners_title'), component: <PartnersCarousel /> },
+      { id: 'how-it-works', title: t('how_it_works_title'), component: <HowItWorksSection /> },
+      { id: 'showcase', title: t('showcase_title'), component: <AlgoBotShowcase botsData={strategyCards} onOpenModal={handleOpenModal} /> },
+      { id: 'builder', title: t('builder_title'), component: <BotConstructorSection /> },
+      { id: 'terminal', title: t('terminal_title'), component: <TerminalSection /> },
+      { id: 'advantages', title: t('advantages_title'), component: <AdvantagesSection /> },
+      { id: 'security', title: t('security_title'), component: <SecuritySection /> },
+      { id: 'about', title: t('about_title') },
+      { id: 'faq', title: t('faq_title'), component: <FaqSection /> },
+      { id: 'start-bot', title: t('start_bot_title'), component: <StartBotSection /> },
   ];
 
   const navLinks = [
-      { id: 'partners', title: 'Партнёры' },
-      { id: 'how-it-works', title: 'Как это работает?' },
-      { id: 'showcase', title: 'Витрина' },
-      { id: 'about', title: 'О нас' },
-      { id: 'faq', title: 'FAQ' },
+      { id: 'partners', title: t('nav_partners') },
+      { id: 'how-it-works', title: t('nav_how_it_works') },
+      { id: 'showcase', title: t('nav_showcase') },
+      { id: 'about', title: t('nav_about') },
+      { id: 'faq', title: t('nav_faq') },
+  ];
+
+  const achievements = [
+    {
+        year: t('achievement1_year'),
+        logo: 'profitway.1c6e10dc.svg',
+        items: t('achievement1_items', { returnObjects: true }),
+    },
+    {
+        year: t('achievement2_year'),
+        logo: 'profixone.25e89bb0.svg',
+        items: t('achievement2_items', { returnObjects: true }),
+    },
+    {
+        year: t('achievement3_year'),
+        logo: 'fixone.e30be817.svg',
+        items: t('achievement3_items', { returnObjects: true }),
+    },
   ];
 
   return (
@@ -91,8 +113,9 @@ const LandingPage = () => {
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/auth"><Button variant="text" className="!border-[#25DE85] !text-[#25DE85] !border-2 !px-8 !py-3">Войти</Button></Link>
-            <Link to="/auth"><Button variant="big-classic">Открыть счёт</Button></Link>
+            <LanguageSwitcher />
+            <Button variant="text" className="!border-[#25DE85] !text-[#25DE85] !border-2 !px-8 !py-3" disabled>{t('login_button')}</Button>
+            <Link to="/auth"><Button variant="big-classic">{t('signup_button')}</Button></Link>
           </div>
           <div className="md:hidden">
             <Button variant="icon" onClick={() => setMobileMenuOpen(true)}><ICONS.burger className="w-8 h-8 text-black" /></Button>
@@ -113,8 +136,11 @@ const LandingPage = () => {
                 ))}
             </nav>
             <div className="mt-8 pt-6 border-t border-grey-2 flex flex-col gap-4">
-                <Link to="/auth" className="w-full" onClick={() => setMobileMenuOpen(false)}><Button variant="big-outline" className="w-full !border-[#FF2B00] !text-[#FF2B00]">Войти</Button></Link>
-                <Link to="/auth" className="w-full" onClick={() => setMobileMenuOpen(false)}><Button variant="big-classic" className="w-full">Открыть счёт</Button></Link>
+                <div className="px-4 mb-4">
+                    <LanguageSwitcher />
+                </div>
+                <Button variant="big-outline" className="w-full !border-[#FF2B00] !text-[#FF2B00]" disabled>{t('login_button')}</Button>
+                <Link to="/auth" className="w-full" onClick={() => setMobileMenuOpen(false)}><Button variant="big-classic" className="w-full">{t('signup_button')}</Button></Link>
             </div>
         </div>
       </header>
@@ -123,10 +149,10 @@ const LandingPage = () => {
         <section id="hero" className="bg-bg-light" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/backgroundImage.svg)`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
             <div className="container mx-auto px-4 sm:px-6 py-16 md:py-24 flex items-center justify-center">
                 <div className="max-w-7xl text-center">
-                    <h1 className="font-tt-travels text-4xl sm:text-5xl font-bold mb-6">Создавай. Запускай. Зарабатывай.</h1>
-                    <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-6">Платформа, где ваши алгоритмы превращаются в живую силу, способную зарабатывать 24/7. Гибкий инструментарий, автоматизация, мгновенное развертывание — всё, чтобы вы могли сосредоточиться на стратегии, а не на рутине.</p>
-                    <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-10">Своя биржа, терминал на базе MetaTrader 5, низкие комиссии и готовые алго-боты — от долгосрока до скальпинга.</p>
-                    <Link to="/auth"><Button variant="big-with-arrow">Присоединиться</Button></Link>
+                    <h1 className="font-tt-travels text-4xl sm:text-5xl font-bold mb-6">{t('hero_title')}</h1>
+                    <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-6">{t('hero_subtitle1')}</p>
+                    <p className="text-lg sm:text-xl text-text-grey max-w-6xl mx-auto mb-10">{t('hero_subtitle2')}</p>
+                    <Link to="/auth"><Button variant="big-with-arrow">{t('hero_join_button')}</Button></Link>
                 </div>
             </div>
         </section>
@@ -136,78 +162,40 @@ const LandingPage = () => {
         <section key={section.id} id={section.id} className={`py-20 ${section.id === 'start-bot' ? 'px-0' : (section.id === 'terminal' || section.id === 'advantages' || section.id === 'security' ? 'px-16' : 'px-4 sm:px-10')} ${index % 2 === 0 ? 'bg-white' : 'bg-bg-light'}`}>
             {section.id === 'about' ? (
                 <div className="max-w-7xl mx-auto px-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-left mb-4">О нас</h2>
-                    <p className="text-base md:text-lg text-gray-700 mb-4">
-                        Мы создаём комфортную среду для алготрейдинга и автоматических стратегий. Компания Fixone Global Trading основана для того, чтобы каждый трейдер и инвестор мог зарабатывать на международных рынках без препятствий и лишних барьеров. Опираясь на опыт работы с 2019 года и десятки успешно реализованных стратегий, мы сделали ставку на автоматизацию и алго-ботов, которые позволяют стабильно работать в любых рыночных условиях.
-                    </p>
-                    <p className="text-base md:text-lg text-gray-700 mb-4">
-                        Наши решения подходят для скальперов, арбитражёров, криптотрейдеров, алготрейдеров, управляющих и частных инвесторов. В торговом терминале Fixone MetaTrader 5 доступны все стратегии — от классических тактик до продвинутых алгоритмических моделей, полностью готовых к интеграции с ботами.
-                    </p>
-                    <p className="text-lg md:text-xl font-bold text-gray-700 mb-12">
-                        Fixone — это надёжная экосистема, где идеи превращаются в алгоритмы, а алгоритмы — в прибыль.
-                    </p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-left mb-4">{t('about_title')}</h2>
+                    <p className="text-base md:text-lg text-gray-700 mb-4">{t('about_text1')}</p>
+                    <p className="text-base md:text-lg text-gray-700 mb-4">{t('about_text2')}</p>
+                    <p className="text-lg md:text-xl font-bold text-gray-700 mb-12">{t('about_text3')}</p>
 
                     <div className="flex flex-col lg:flex-row gap-12">
                         {/* Left Block - Igor Botnari Photo */}
                         <div className="relative w-full lg:w-1/2 rounded-lg overflow-hidden shadow-lg h-96 lg:h-auto">
                             <img
                                 src={`${process.env.PUBLIC_URL}/igor.cbc61e98.webp`}
-                                alt="Игорь Ботнари"
+                                alt={t('ceo_name')}
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 p-4">
-                                <p className="text-white text-xl font-semibold">Игорь Ботнари</p>
-                                <p className="text-white text-sm">Генеральный директор и основатель</p>
+                                <p className="text-white text-xl font-semibold">{t('ceo_name')}</p>
+                                <p className="text-white text-sm">{t('ceo_title')}</p>
                             </div>
                         </div>
 
                         {/* Right Block - Achievement Cards */}
                         <div className="w-full lg:w-1/2 grid grid-cols-1 gap-8">
-                            {[
-                                {
-                                    year: 2019,
-                                    logo: 'profitway.1c6e10dc.svg',
-                                    items: [
-                                        "Запуск первых инвестиционных продуктов",
-                                        "Начало пути к созданию собственной экосистемы",
-                                    ],
-                                },
-                                {
-                                    year: 2021,
-                                    logo: 'profixone.25e89bb0.svg',
-                                    items: [
-                                        "Создана компания с инновационными инвестиционными решениями",
-                                        "Выпуск собственных криптотокенов и NFT",
-                                        "Запуск брокерской компании на базе White Label",
-                                        "Миллионные прибыли партнёров и международные награды",
-                                        "Объединение трейдеров во главе с Игорем Ботнари",
-                                    ],
-                                },
-                                {
-                                    year: 2023,
-                                    logo: 'fixone.e30be817.svg',
-                                    items: [
-                                        "Внедрение собственного торгового терминала Fixone MetaTrader 5",
-                                        "Интеграция криптобиржи и поставщиков ликвидности",
-                                        "Поддержка всех типов инструментов: от классических до криптографических",
-                                    ],
-                                },
-                            ].map((achievement, achIndex) => (
+                            {achievements.map((achievement, achIndex) => (
                                 <div key={achIndex} className="bg-white p-6 rounded-[30px] shadow-md relative">
-                                    {/* Logo */}
                                     <img
                                         src={`${process.env.PUBLIC_URL}/${achievement.logo}`}
                                         alt="Company Logo"
                                         className={`absolute ${achIndex === 0 ? 'top-4' : 'top-[-1rem]'} left-4 object-contain ${achIndex === 0 ? 'w-12 h-12' : 'w-24 h-24'}`}
                                     />
-                                    {/* Year Plaque */}
                                     <div className="absolute top-4 right-4 bg-[#EFA46F] text-white text-sm font-bold px-3 py-1 rounded-full">
                                         {achievement.year}
                                     </div>
                                     <ul className="mt-12 space-y-2">
-                                        {achievement.items.map((item, itemIndex) => (
+                                        {Array.isArray(achievement.items) && achievement.items.map((item, itemIndex) => (
                                             <li key={itemIndex} className="flex items-start text-gray-700">
-                                                {/* Green Checkmark Icon */}
                                                 <svg className="w-5 h-5 text-[#25DE85] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                                 </svg>
@@ -268,11 +256,11 @@ const LandingPage = () => {
                     <span className="text-gray-400">Авторские права © 2023</span>
                 </div>
                 <div className="flex items-center gap-4 flex-wrap">
-                    <a href="https://www.fixoneglobal.com/TERMS_AND_CONDITIONS_FIXONE_GLOBAL_TRADING.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black">Условия и положения</a>
+                    <a href="https://www.fixoneglobal.com/TERMS_AND_CONDITIONS_FIXONE_GLOBAL_TRADING.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black">{t('footer_terms')}</a>
                     <span className="text-gray-400">|</span>
-                    <a href="https://www.fixoneglobal.com/PRIVACY_POLICY_FIXONE_GLOBAL_TRADING_.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black">Политика конфиденциальности</a>
+                    <a href="https://www.fixoneglobal.com/PRIVACY_POLICY_FIXONE_GLOBAL_TRADING_.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black">{t('footer_privacy')}</a>
                     <span className="text-gray-400">|</span>
-                    <a href="https://www.fixoneglobal.com/documents/" target="_blank" rel="noopener noreferrer" className="hover:text-black">Юридические документы</a>
+                    <a href="https://www.fixoneglobal.com/documents/" target="_blank" rel="noopener noreferrer" className="hover:text-black">{t('footer_legal')}</a>
                 </div>
                 <a href="mailto:support@fixoneglobal.com" className="text-main hover:text-main-dark font-semibold">support@fixoneglobal.com</a>
             </div>

@@ -1,0 +1,104 @@
+# Поэтапная фронтенд-бэкенд структура (FIXONE ALGO)
+
+---
+
+## ЭТАП 1. БАЗА (архитектура + интернационализация)
+
+### 1.1 Интернационализация
+
+* Подключить i18n.
+* Добавить 6 языков (RU, EN, ES, CN, DE, AR).
+* Настроить lazy-loading переводов.
+* Реализовать переключатель языка в Header.
+
+### 1.2 Архитектура фронтенда
+
+* Структурировать папки `src/` (components, pages, layouts, store, services, modules, i18n).
+* Внедрить React Router для многостраничности.
+* Создать базовый Layout (Header, Footer, Content).
+
+### 1.3 Минимальный backend stub
+
+* Node.js + Express (или NestJS).
+* Endpoint `/api/health`.
+* Подключить к фронту для проверки.
+
+---
+
+## ЭТАП 2. BACKEND ОСНОВА (Auth + Users)
+
+### 2.1 Настройка backend окружения
+
+* Node.js + NestJS (рекомендуется).
+* PostgreSQL через Docker.
+* ORM: Prisma/TypeORM.
+
+### 2.2 Аутентификация
+
+* JWT (access + refresh).
+* Роуты: `/auth/register`, `/auth/login`, `/auth/refresh`.
+* Middleware для проверки токена.
+
+### 2.3 Пользователи
+
+* Модель User (id, email, passwordHash, role, createdAt).
+* Роут `/users/me`.
+* Возможность редактировать профиль.
+
+---
+
+## ЭТАП 3. DASHBOARD (после логина)
+
+### 3.1 Layout
+
+* Общий DashboardLayout (Header, Sidebar, Content).
+* Sidebar: навигация по разделам.
+
+### 3.2 Страницы Dashboard
+
+* `/dashboard` — главная.
+* `/dashboard/marketplace` — маркетплейс.
+* `/dashboard/wallet` — кошелёк.
+* `/dashboard/feed` — лента.
+* `/dashboard/help` — помощь.
+* `/dashboard/settings` — профиль.
+
+---
+
+## ЭТАП 4. ОСНОВНОЙ ФУНКЦИОНАЛ
+
+### 4.1 Маркетплейс
+
+* Backend: CRUD для стратегий (id, title, desc, authorId, price).
+* Frontend: список карточек стратегий, фильтрация, сортировка.
+
+### 4.2 Кошелёк
+
+* Backend: баланс пользователя, транзакции (id, userId, type, amount, status).
+* Frontend: история операций, кнопки «Пополнить»/«Вывести».
+
+### 4.3 Лента (новости + комментарии)
+
+* Backend: Post (id, title, content, createdAt), Comment (id, postId, userId, text).
+* Frontend: список постов, отдельная страница поста, форма комментов.
+
+### 4.4 Помощь (инструкции + видео)
+
+* Backend: Article (id, title, content, type), VideoStep (id, articleId, stepNumber, videoUrl).
+* Frontend: древовидная структура статей, шаги с видео.
+
+### 4.5 Конструктор ботов
+
+* Backend: Bot (id, userId, configJSON).
+* Endpoint `/bots/execute` (mock).
+* Frontend: drag-and-drop интерфейс правил, сохранение конфигурации.
+
+---
+
+## ЭТАП 5. ДОПОЛНИТЕЛЬНОЕ
+
+* Темная/светлая тема.
+* SEO оптимизация.
+* Email-уведомления.
+* WebSockets (онлайн-статусы, real-time обновления).
+* CI/CD автодеплой (GitHub Actions + сервер).

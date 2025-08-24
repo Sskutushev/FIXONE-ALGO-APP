@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import TradingViewWidget from '../components/TradingViewWidget'; // Import the widget
+import TradingViewWidget from '../../components/TradingViewWidget'; // Adjusted import path
 
 // ICONS PLACEHOLDER
 const ICONS = {
@@ -40,16 +40,16 @@ const ProgressBar = () => {
 
     return (
         <div className="w-full mb-8">
-            <div className="flex items-start">
+            <div className="flex items-center -mx-2">
                 {steps.map((step, index) => (
                     <React.Fragment key={step}>
-                        <div className="flex flex-col items-center w-20">
-                            <div className={`w-12 h-8 rounded-full flex items-center justify-center text-gray-700 bg-gray-200 border-2 border-gray-300`}>
+                        <div className="flex flex-col items-center px-2 w-24">
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-gray-700 bg-gray-200 border-2 border-gray-300`}>
                                 <span className="font-bold">{index + 1}</span>
                             </div>
                             <p className="text-xs mt-2 text-center font-semibold text-gray-600">{step}</p>
                         </div>
-                        {index < steps.length - 1 && <div className={`flex-1 h-0.5 bg-gray-300`}></div>}
+                        {index < steps.length - 1 && <div className={`flex-1 h-1 bg-gray-300`}></div>}
                     </React.Fragment>
                 ))}
             </div>
@@ -59,10 +59,10 @@ const ProgressBar = () => {
 
 const ToggleSwitch = ({ label, isOn, onToggle }) => {
     return (
-        <div className="flex items-center justify-between">
-            <span className="text-sm">{label}</span>
-            <button onClick={onToggle} className={`w-12 h-6 rounded-full p-1 flex items-center transition-colors ${isOn ? 'bg-[#25DE85] justify-end' : 'bg-gray-300 justify-start'}`}>
-                <div className="w-4 h-4 bg-white rounded-full shadow-md"></div>
+        <div className="flex items-center justify-between py-2">
+            <span className="text-sm font-medium">{label}</span>
+            <button onClick={onToggle} className={`w-12 h-6 rounded-full p-1 flex items-center transition-colors ${isOn ? 'bg-main justify-end' : 'bg-gray-300 justify-start'}`}>
+                <div className="w-4 h-4 bg-white rounded-full shadow-md transform transition-transform"></div>
             </button>
         </div>
     );
@@ -70,9 +70,9 @@ const ToggleSwitch = ({ label, isOn, onToggle }) => {
 
 const DropdownControl = ({ label, options }) => (
     <div className="flex-1">
-        <label className="text-xs text-gray-500">{label}</label>
+        <label className="text-xs text-gray-500 mb-1 block">{label}</label>
         <div className="relative">
-            <select className="w-full bg-gray-100 border border-gray-300 rounded-md px-3 py-2 appearance-none">
+            <select className="w-full bg-gray-50 border border-gray-300 rounded-md px-3 py-2 appearance-none focus:outline-none focus:ring-2 focus:ring-main">
                 {options.map(opt => <option key={opt}>{opt}</option>)}
             </select>
             <ICONS.chevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
@@ -101,12 +101,12 @@ const FilterRow = ({ number, onRemove }) => {
     const typeOptions = ['На закрытии бара', 'Раз в минуту'];
 
     return (
-        <div className="flex flex-col sm:flex-row items-center gap-2 p-2 border rounded-md">
-            <span className="font-bold text-sm w-4 text-center mb-2 sm:mb-0">{number}</span>
+        <div className="flex flex-col sm:flex-row items-center gap-2 p-2 border rounded-lg bg-gray-50">
+            <span className="font-bold text-sm w-4 text-center mb-2 sm:mb-0 text-gray-500">{number}</span>
             <div className="w-full sm:flex-grow sm:w-1/3"><DropdownControl label="Индикатор" options={indicatorOptions} /></div>
             <div className="w-full sm:flex-grow sm:w-1/4"><DropdownControl label="Интервал" options={intervalOptions} /></div>
             <div className="w-full sm:flex-grow sm:w-1/3"><DropdownControl label="Тип" options={typeOptions} /></div>
-            <button onClick={onRemove} className="text-gray-400 hover:text-red-500 ml-auto sm:ml-0"><ICONS.close className="w-5 h-5" /></button>
+            <button onClick={onRemove} className="text-gray-400 hover:text-red-500 ml-auto sm:ml-2 flex-shrink-0"><ICONS.close className="w-5 h-5" /></button>
         </div>
     );
 };
@@ -160,93 +160,79 @@ const CreateBotPage = () => {
         setSelectedPair(e.target.value);
     };
 
+    // This component no longer has its own header or full-page background.
+    // It will be rendered inside the DashboardLayout.
     return (
-        <div className="min-h-screen bg-gray-100 font-sans">
-            {/* Header */}
-            <header className="bg-white shadow-md sticky top-0 z-20">
-                <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        <img src={`${process.env.PUBLIC_URL}/Frame 7462.svg`} alt="FIXONE ALGO Logo" className="h-10 w-10"/>
-                        <span className="font-bold text-xl">Создание бота</span>
-                    </div>
-                    <Link to="/" className="text-gray-500 hover:text-black">
-                        <ICONS.close className="w-8 h-8" />
-                    </Link>
-                </div>
-            </header>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            {/* Left Column - Chart */}
+            <div className="lg:col-span-2 bg-white rounded-[60px] shadow-lg p-1 flex flex-col h-96 lg:h-[calc(100vh-10rem)]">
+                <TradingViewWidget symbol={selectedPair} />
+            </div>
 
-            {/* Main Content */}
-            <main className="container mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Left Column - Chart */}
-                <div className="bg-white rounded-lg shadow-md p-1 flex flex-col h-96 lg:h-[calc(100vh-120px)]">
-                    <TradingViewWidget symbol={selectedPair} />
-                </div>
-
-                {/* Right Column - Form */}
-                <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 h-auto lg:h-[calc(100vh-120px)] lg:overflow-y-auto">
+            {/* Right Column - Form */}
+            <div className="lg:col-span-3 bg-white rounded-[60px] shadow-lg p-4 sm:p-6 h-auto lg:h-[calc(100vh-10rem)] lg:overflow-y-auto">
+                <div className="max-w-3xl mx-auto">
                     <ProgressBar />
 
                     <div className="space-y-6">
                         {/* Step 1: Name */}
-                        <div>
-                            <label className="font-bold">Название бота</label>
-                            <input type="text" placeholder="Мой супер бот" className="w-full mt-1 p-2 border rounded-md" />
+                        <div className="p-4 border rounded-lg">
+                            <label className="font-bold text-lg">Название бота</label>
+                            <input type="text" placeholder="Мой супер бот" className="w-full mt-2 p-3 bg-gray-50 border-gray-300 border rounded-md focus:outline-none focus:ring-2 focus:ring-main" />
                         </div>
 
                         {/* Step 2: Pair */}
-                        <div>
-                            <label className="font-bold">Торговая пара</label>
-                            <div className="flex items-center gap-2 mt-1">
+                        <div className="p-4 border rounded-lg">
+                            <label className="font-bold text-lg">Торговая пара</label>
+                            <div className="flex items-center gap-2 mt-2">
                                  <div className="flex-1">
                                     <div className="relative">
-                                        <select onChange={handlePairChange} value={selectedPair} className="w-full bg-gray-100 border border-gray-300 rounded-md px-3 py-2 appearance-none">
+                                        <select onChange={handlePairChange} value={selectedPair} className="w-full bg-gray-50 border border-gray-300 rounded-md px-3 py-3 appearance-none focus:outline-none focus:ring-2 focus:ring-main">
                                             {pairOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                                         </select>
-                                        <ICONS.chevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+                                        <ICONS.chevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
                                     </div>
                                 </div>
-                                {selectedPair && <div className="bg-gray-200 px-3 py-1 rounded-full flex items-center gap-2 text-sm">{pairOptions.find(p => p.value === selectedPair)?.label} <button onClick={() => setSelectedPair(null)}><ICONS.close className="w-3 h-3"/></button></div>}
                             </div>
                         </div>
 
                         {/* Step 3: Deposit */}
-                        <div>
-                            <label className="font-bold">Депозит</label>
-                            <div className="flex flex-col sm:flex-row items-end gap-4 mt-1">
+                        <div className="p-4 border rounded-lg">
+                            <label className="font-bold text-lg">Депозит</label>
+                            <div className="flex flex-col sm:flex-row items-end gap-4 mt-2">
                                 <div className="flex-1 w-full">
-                                    <input type="number" placeholder="1000" className="w-full p-2 border rounded-md" />
-                                    <p className="text-xs text-gray-500">Депозит</p>
+                                    <p className="text-xs text-gray-500 mb-1">Сумма</p>
+                                    <input type="number" placeholder="1000" className="w-full p-3 bg-gray-50 border-gray-300 border rounded-md focus:outline-none focus:ring-2 focus:ring-main" />
                                 </div>
                                 <div className="flex-1 w-full">
-                                    <p className="p-2 border-b">$1737.61</p>
-                                    <p className="text-xs text-gray-500">Баланс на счёте</p>
+                                    <p className="text-xs text-gray-500 mb-1">Баланс на счёте</p>
+                                    <p className="p-3 border-b-2">$1737.61</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Step 4: Entry */}
-                        <div className="p-4 border rounded-md space-y-4">
-                            <h4 className="font-bold">Вход в сделку</h4>
+                        <div className="p-4 border rounded-lg space-y-4">
+                            <h4 className="font-bold text-lg">Вход в сделку</h4>
                             
-                            {/* Trading Mode Section */}
                             <div className="mt-4">
-                                <div className="flex items-center gap-2 mb-2">
+                                <div className="flex items-center gap-2 mb-3">
                                     <h5 className="font-semibold">Режим торговли</h5>
                                     <div className="relative group">
                                         <ICONS.warning className="w-4 h-4 text-gray-400 cursor-pointer" />
-                                        <div className="absolute bottom-full mb-2 w-64 bg-black text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                        <div className="absolute bottom-full mb-2 w-64 bg-black text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
                                             Это готовые наборы параметров для входа в сделку, которые помогут вам быстрее принять решение.
                                         </div>
                                     </div>
                                 </div>
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                     {tradingModes.map(mode => (
                                         <div 
                                             key={mode.name} 
                                             onClick={() => setTradingMode(mode.name)}
-                                            className={`p-3 border rounded-lg cursor-pointer ${tradingMode === mode.name ? 'border-[#FF2B00] ring-2 ring-[#FF2B00]' : 'border-gray-300'}`}>
+                                            className={`p-3 border-2 rounded-lg cursor-pointer transition-all ${tradingMode === mode.name ? 'border-main shadow-md' : 'border-gray-200 hover:border-gray-400'}`}>
                                             <h6 className="font-bold text-sm mb-2">{mode.name}</h6>
-                                            <div className="text-xs space-y-1">
+                                            <div className="text-xs space-y-1 text-gray-600">
                                                 {mode.params.map(param => <p key={param}>{param}</p>)}
                                             </div>
                                         </div>
@@ -254,7 +240,7 @@ const CreateBotPage = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 pt-4">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4">
                                 <DropdownControl label="Перекрытие" options={['0.5', '0.75', '1', '1.25']} />
                                 <DropdownControl label="Сетка ордеров" options={['2', '3', '4', '5']} />
                                 <DropdownControl label="Мартингейл" options={['1%', '5%', '10%']} />
@@ -265,16 +251,16 @@ const CreateBotPage = () => {
                         </div>
 
                         {/* Step 5: Entry Conditions */}
-                        <div className="p-4 border rounded-md space-y-4">
-                            <h4 className="font-bold">Условия открытия сделки</h4>
-                            <div className="space-y-2">
+                        <div className="p-4 border rounded-lg space-y-4">
+                            <h4 className="font-bold text-lg">Условия открытия сделки</h4>
+                            <div className="space-y-3">
                                 {filters.map((filter, index) => (
                                     <FilterRow key={filter.id} number={index + 1} onRemove={() => removeFilter(filter.id)} />
                                 ))}
                             </div>
                             <button 
                                 onClick={addFilter} 
-                                className="text-sm text-blue-600 hover:underline disabled:text-gray-400 disabled:no-underline"
+                                className="text-sm font-semibold text-blue-600 hover:underline disabled:text-gray-400 disabled:no-underline mt-2"
                                 disabled={filters.length >= 5}
                             >
                                 + Добавить фильтр
@@ -282,18 +268,18 @@ const CreateBotPage = () => {
                         </div>
 
                         {/* Step 6: Exit */}
-                        <div className="p-4 border rounded-md space-y-4">
-                            <h4 className="font-bold">Выход из сделки</h4>
+                        <div className="p-4 border rounded-lg space-y-4">
+                            <h4 className="font-bold text-lg">Выход из сделки</h4>
                             <div className="flex items-end gap-4">
                                 <DropdownControl label="Профит" options={['0.2%', '0.5%', '1%', '5%', '10%', '15%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%']} />
                                 <div>
-                                    <p className="p-2 border-b text-gray-500">$ USD</p>
-                                    <p className="text-xs text-gray-500">Валюта профита</p>
+                                    <p className="text-xs text-gray-500 mb-1">Валюта профита</p>
+                                    <p className="p-3 border-b-2">$ USD</p>
                                 </div>
                             </div>
                             <ToggleSwitch label="Стоп-лосс" isOn={isStopLossEnabled} onToggle={() => setIsStopLossEnabled(!isStopLossEnabled)} />
                             {isStopLossEnabled && (
-                                <div className="pl-4 pt-2">
+                                <div className="pl-4 pt-2 border-l-2 ml-2">
                                     <DropdownControl label="Процент стоп-лосса" options={['-0.1%', '-0.2%', '-0.5%', '-1%', '-2%', '-5%', '-10%']} />
                                 </div>
                             )}
@@ -301,18 +287,15 @@ const CreateBotPage = () => {
                         </div>
 
                         {/* Final Button */}
-                        <div className="relative group">
-                            <button className="w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-lg flex items-center justify-center gap-2 cursor-not-allowed">
+                        <div className="relative group mt-6">
+                            <button className="w-full bg-main hover:bg-main-dark text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition-colors">
                                 <ICONS.plus className="w-6 h-6" />
                                 <span>Создать бота</span>
                             </button>
-                            <div className="absolute bottom-full mb-2 w-max bg-black text-white text-xs rounded py-1 px-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none left-1/2 -translate-x-1/2">
-                                В данный момент находится в разработке
-                            </div>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     );
 };
